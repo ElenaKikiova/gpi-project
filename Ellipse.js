@@ -26,8 +26,14 @@ const Ellipse = class {
     const calculatedWidth = event.clientX - this.startX - 60;
     const calculatedHeight = event.clientY - this.startY - 60;
 
+    const calculatedX = event.clientX - this.Elip.width() - 60;
+    const calculatedY = event.clientY - this.Elip.height() - 60;
+
     let widthLabel = {x: event.clientX - 100, y: event.clientY - 50};
     let heightLabel = {x: event.clientX - 60, y: event.clientY - 90};
+
+    this.Elip.x(calculatedX);
+    this.Elip.y(calculatedY);
 
     this.Elip.width(Math.abs(calculatedWidth));
     this.Elip.height(Math.abs(calculatedHeight));
