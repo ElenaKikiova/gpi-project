@@ -8,16 +8,14 @@ const Rectangle = class {
   SizeLabelWidth = new SizeLabel();
   SizeLabelHeight = new SizeLabel();
   DrawingArea;
-
+  
   startX;
   startY;
 
   constructor(){
     document.body.style.cursor = 'crosshair';
-    // this.Color = Color;
     this.listenForFistClick();
   }
-
   
   onSecondPointClicked = () => {
     getElement("#drawing-area").removeEventListener("mousemove", this.onMouseMovement);

@@ -6,7 +6,7 @@ const ColorPicker = class {
   
   constructor(){
     getElement("#color-picker").value = this.Color;
-    getElement("#color-picker").addEventListener("change", this.changeColor);
+    getElement("#color-picker").addEventListener("input", this.changeColor);
   }
 
   getColor = () => {
@@ -14,7 +14,6 @@ const ColorPicker = class {
   }
 
   changeColor = (event) => {
-    console.log(event, event.target.value);
     this.Color = event.target.value;
   }
 
