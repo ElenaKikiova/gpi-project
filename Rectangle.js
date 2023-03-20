@@ -1,6 +1,7 @@
 import { SizeLabel } from "./SizeLabel.js";
 import { getElement } from "./helpers.js";
 import { SVGArea } from "./Main.js";
+import { ColorPickerObject } from "./modules.js";
 
 const Rectangle = class {
   Rect;
@@ -8,14 +9,12 @@ const Rectangle = class {
   SizeLabelHeight = new SizeLabel();
   DrawingArea;
 
-  Color;
-
   startX;
   startY;
 
-  constructor(Color){
+  constructor(){
     document.body.style.cursor = 'crosshair';
-    this.Color = Color;
+    // this.Color = Color;
     this.listenForFistClick();
   }
 
@@ -60,7 +59,7 @@ const Rectangle = class {
     this.startX = event.clientX - 60;
     this.startY = event.clientY - 60;
   
-    this.Rect = SVGArea.getObject().rect(1, 1).move(this.startX, this.startY + 5).fill(this.Color);
+    this.Rect = SVGArea.getObject().rect(1, 1).move(this.startX, this.startY + 5).fill(ColorPickerObject.getColor());
     
     setTimeout(() => {
       getElement("#drawing-area").addEventListener("mouseup", this.onSecondPointClicked);
