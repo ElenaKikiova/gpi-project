@@ -3,6 +3,7 @@ import { getElement } from "./helpers.js";
 import { Rectangle } from "./Rectangle.js";
 import { SVGArea } from "./Main.js";
 import { ColorPicker } from "./ColorPicker.js";
+import { Ellipse } from "./Ellipse.js";
 
 
 SVGArea.drawGrid();
@@ -13,5 +14,8 @@ getElement("#rectangleTool").addEventListener("click", () => {
   const Rect = new Rectangle();
 });
 
+getElement("#ellipseTool").addEventListener("click", () => {
+  const Elip = new Ellipse();
+});
 
 export { ColorPickerObject }
