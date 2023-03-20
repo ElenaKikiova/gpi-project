@@ -1,59 +1,21 @@
-const getElement = (selector) => document.querySelector(selector);
+import { SizeLabel } from "./SizeLabel.js";
+import { getElement } from "./helpers.js";
+import { SVGArea } from "./Main.js";
 
-const drawingAreaWidth = getElement("#drawing-area").clientWidth;
-const drawingAreaHeight = getElement("#drawing-area").clientHeight;
-
-console.log(drawingAreaHeight, drawingAreaWidth)
-const draw = SVG().addTo('#drawing-area').size(drawingAreaWidth, drawingAreaHeight);
-
-let step = 50;
-for(let x = step; x < drawingAreaWidth; x++){
-  let line = draw.line(0, drawingAreaHeight, 0, 0).move(x, 0);
-  line.stroke({ color: '#333', width: 0.1, linecap: 'round' })
-  x += step;
-}
-
-for(let y = step; y < drawingAreaWidth; y++){
-  let line = draw.line(drawingAreaWidth, 0, 0, 0).move(0, y);
-  line.stroke({ color: '#333', width: 0.1, linecap: 'round' })
-  y += step;
-}
-
-
-const onRectangleToolClick = () => {
-  console.log('e');
-
-  const RectMode = new DrawRectangleMode();
-}
-
-const SizeLabel = class {
-  Label;
-  text;
-  x;
-  y;
-
-  setLabel(text, x, y){
-    if(!this.Label){
-      this.Label = draw.text(text).move(x, y);
-      this.Label.attr('class', 'size-label')
-    }
-    else {
-      this.Label.text(text).move(x, y);
-    }
-  }
-}
-
-
-const DrawRectangleMode = class {
+const Rectangle = class {
   Rect;
   SizeLabelWidth = new SizeLabel();
   SizeLabelHeight = new SizeLabel();
+  DrawingArea;
+
+  Color;
 
   startX;
   startY;
 
-  constructor(){
+  constructor(Color){
     document.body.style.cursor = 'crosshair';
+    this.Color = Color;
     this.listenForFistClick();
   }
 
@@ -98,7 +60,7 @@ const DrawRectangleMode = class {
     this.startX = event.clientX - 60;
     this.startY = event.clientY - 60;
   
-    this.Rect = draw.rect(1, 1).move(this.startX, this.startY + 5).fill('#f06');
+    this.Rect = SVGArea.getObject().rect(1, 1).move(this.startX, this.startY + 5).fill(this.Color);
     
     setTimeout(() => {
       getElement("#drawing-area").addEventListener("mouseup", this.onSecondPointClicked);
@@ -114,3 +76,5 @@ const DrawRectangleMode = class {
     getElement("#drawing-area").addEventListener("mousedown", this.onFirstPointClicked);
   }
 }
+
+export { Rectangle };
