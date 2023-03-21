@@ -18,13 +18,13 @@ const DrawingArea = class {
     for(let x = this.gridSize; x < this.width; x++){
       let line = this.Object.line(0, this.height, 0, 0).move(x, 0);
       line.stroke({ color: '#333', width: 0.1, linecap: 'round' })
-      x += this.gridSize;
+      x += (this.gridSize - 1);
     }
 
     for(let y = this.gridSize; y < this.height; y++){
       let line = this.Object.line(this.width, 0, 0, 0).move(0, y);
       line.stroke({ color: '#333', width: 0.1, linecap: 'round' })
-      y += this.gridSize;
+      y += (this.gridSize - 1);
     }
 
   }

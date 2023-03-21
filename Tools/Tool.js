@@ -1,7 +1,5 @@
 import { SizeLabel } from "../SizeLabel.js";
-import { getElement } from "../helpers.js";
-import { SVGArea } from "../Main.js";
-import { ColorPickerObject } from "../modules.js";
+import { getDrawingAreaCoordinates, getElement } from "../helpers.js";
 
 const Tool = class {
   Element;
@@ -22,7 +20,7 @@ const Tool = class {
 
   onToolClicked = () => {
     this.activeTool = true;
-    document.body.style.cursor = 'crosshair';
+    // document.body.style.cursor = 'crosshair';
     this.listenForFistClick();
   }
   
@@ -73,8 +71,7 @@ const Tool = class {
   }
 
   onFirstPointClicked = (event) => {
-    this.startX = event.clientX - 60;
-    this.startY = event.clientY - 60;
+    [this.startX, this.startY] = getDrawingAreaCoordinates(event);
   
     this.drawElement();
     

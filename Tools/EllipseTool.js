@@ -16,8 +16,13 @@ const EllipseTool = class EllipseTool extends Tool {
     const calculatedX = event.clientX - this.Element.width() - 60;
     const calculatedY = event.clientY - this.Element.height() - 60;
 
-    let widthLabel = {x: event.clientX - 60 - this.SizeLabelWidth.width(), y: event.clientY - 60 };
-    let heightLabel = {x: event.clientX - 60, y: event.clientY - 60 - this.SizeLabelHeight.height()};
+    const corners = {
+      tl: {x: this.startX, y: this.startY },
+      br: {x: this.startX + this.Element.width(), y: this.startY + this.Element.height()},
+    }
+
+    let widthLabel = {x: corners.br.x - this.SizeLabelWidth.width(), y: corners.br.y };
+    let heightLabel = {x: corners.br.x, y: corners.br.y - this.SizeLabelHeight.height()};
 
     this.Element.x(calculatedX);
     this.Element.y(calculatedY);

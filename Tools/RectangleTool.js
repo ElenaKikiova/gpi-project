@@ -1,3 +1,4 @@
+import { getDrawingAreaCoordinates } from "../helpers.js";
 import { SVGArea } from "../Main.js";
 import { ColorPickerObject } from "../modules.js";
 import { Tool } from "./Tool.js";
@@ -10,8 +11,11 @@ const RectangleTool = class RectangleTool extends Tool {
 
   onMouseMovement = (event) => {
     this.startListeningForShiftHold();
-    const calculatedWidth = event.clientX - this.startX - 60;
-    const calculatedHeight = event.clientY - this.startY - 60;
+
+    const [clientX, clientY] = getDrawingAreaCoordinates(event);
+
+    const calculatedWidth = clientX - this.startX;
+    const calculatedHeight = clientY - this.startY;
 
     const corners = {
       tl: {x: this.startX, y: this.startY },
@@ -24,20 +28,27 @@ const RectangleTool = class RectangleTool extends Tool {
     this.Element.width(Math.abs(calculatedWidth));
     this.Element.height(Math.abs(calculatedHeight));
 
+    
     if(calculatedWidth < 0){
-      this.Element.x(event.clientX - 60);
-      widthLabel.x = this.Element.x();
-      heightLabel.x = this.Element.x() - this.SizeLabelHeight.width();
+      this.Element.x(this.startX - this.Element.width());
+      widthLabel = {x: clientX, y: clientY};
+      heightLabel = {x: clientX - this.SizeLabelHeight.width(), y: clientY - this.SizeLabelHeight.height()};
+    }
+    if(calculatedHeight < 0){
+      this.Element.y(clientY);
+      widthLabel = {x: clientX - this.SizeLabelWidth.width(), y: clientY - this.SizeLabelWidth.height()};
+      heightLabel = {x: clientX, y: clientY};
     }
 
-    if(calculatedHeight < 0){
-      this.Element.y(event.clientY - 60);
-      widthLabel.y = this.Element.y() - this.SizeLabelHeight.height();
-      heightLabel.y = this.Element.y();
+    if(calculatedHeight < 0 && calculatedWidth < 0){
+      widthLabel = {x: clientX, y: clientY - this.SizeLabelWidth.height()};
+      heightLabel = {x: clientX - this.SizeLabelHeight.width(), y: clientY};
     }
 
     if(this.keepRatio){
       this.Element.height(this.Element.width());
+      widthLabel = {x: this.startX + this.Element.width() - this.SizeLabelWidth.width(), y: this.startY + this.Element.height()};
+      heightLabel = {x: this.startX + this.Element.width(), y: this.startY + this.Element.height() - this.SizeLabelHeight.height()};
     }
     
     this.setSizeLabels(widthLabel, heightLabel);
