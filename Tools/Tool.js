@@ -55,6 +55,7 @@ const Tool = class {
       this.listenForFistClick();
     }
     this.stopListeningForShiftHold();
+    this.Element.stroke({ color: 'transparent' });
   };
 
   onMouseMovement = (event) => {
@@ -74,6 +75,8 @@ const Tool = class {
     [this.startX, this.startY] = getDrawingAreaCoordinates(event);
   
     this.drawElement();
+
+    this.Element.stroke({ color: '#444', width: 1, linecap: 'round', dasharray: '3, 3' });
     
     setTimeout(() => {
       getElement("#drawing-area").addEventListener("mouseup", this.onSecondPointClicked);
