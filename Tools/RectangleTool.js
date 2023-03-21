@@ -4,26 +4,12 @@ import { Tool } from "./Tool.js";
 
 const RectangleTool = class RectangleTool extends Tool {
 
-  keyDownListener;
-  keepRatio = false;
-
   constructor(){
     super();
   }
 
-  keyDownListener = (event) => {
-    this.keepRatio = event.key == "Shift";
-  }
-
-  startListeningForKeyHold = () => {
-    document.addEventListener("keydown", this.keyDownListener);
-  }
-  // stopListeningForKeyHold = () => {
-  //   document.removeEventListener("keydown", this.keyDownListener);
-  // }
-
   onMouseMovement = (event) => {
-    this.startListeningForKeyHold();
+    this.startListeningForShiftHold();
     const calculatedWidth = event.clientX - this.startX - 60;
     const calculatedHeight = event.clientY - this.startY - 60;
 
@@ -53,7 +39,6 @@ const RectangleTool = class RectangleTool extends Tool {
       this.Element.height(this.Element.width());
       widthLabel = {x: this.startX + this.Element.width() - 50, y: this.startY + this.Element.height()};
       heightLabel = {x: this.startX + this.Element.width(), y: this.startY + this.Element.height() - 20};
-      console.log(heightLabel)
     }
     this.setSizeLabels(widthLabel, heightLabel);
 

@@ -13,6 +13,8 @@ const Tool = class {
   startY;
 
   activeTool;
+  
+  keepRatio = false;
 
   constructor(){
     this.activeTool = false;
@@ -22,6 +24,24 @@ const Tool = class {
     this.activeTool = true;
     document.body.style.cursor = 'crosshair';
     this.listenForFistClick();
+  }
+  
+  keyDownListener = (event) => {
+    this.keepRatio = (event.key == "Shift");
+  }
+  keyUpListener = (event) => {
+    this.keepRatio = false;
+  }
+
+  startListeningForShiftHold = () => {
+    document.addEventListener("keydown", this.keyDownListener);
+    document.addEventListener("keyup", this.keyUpListener);
+  }
+
+  stopListeningForShiftHold = () => {
+    this.keepRatio = false;
+    document.removeEventListener("keydown", this.keyDownListener);
+    document.removeEventListener("keyup", this.keyUpListener);
   }
 
   onToolChanged = () => {
@@ -36,6 +56,7 @@ const Tool = class {
     if(this.activeTool){
       this.listenForFistClick();
     }
+    this.stopListeningForShiftHold();
   };
 
   onMouseMovement = (event) => {

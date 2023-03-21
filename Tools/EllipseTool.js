@@ -9,6 +9,7 @@ const EllipseTool = class EllipseTool extends Tool {
   }
 
   onMouseMovement = (event) => {
+    this.startListeningForShiftHold();
     const calculatedWidth = event.clientX - this.startX - 60;
     const calculatedHeight = event.clientY - this.startY - 60;
 
@@ -41,6 +42,12 @@ const EllipseTool = class EllipseTool extends Tool {
       heightLabel = {x: event.clientX - 90, y: event.clientY - 50};
     }
 
+    if(this.keepRatio){
+      this.Element.height(this.Element.width());
+      widthLabel = {x: this.startX + this.Element.width() - 50, y: this.startY + this.Element.height()};
+      heightLabel = {x: this.startX + this.Element.width(), y: this.startY + this.Element.height() - 20};
+    }
+    
     this.setSizeLabels(widthLabel, heightLabel);
   };
 

@@ -25,7 +25,6 @@ const SizeLabel = class {
       this.LabelBox.attr('class', 'size-label-box');
     }
     this.Label.text(text);
-    console.log(this.calculateLabelWidth(text))
     this.LabelBox.width(this.calculateLabelWidth(text));
     this.LabelGroup.move(x + 5, y + 10);
   }
