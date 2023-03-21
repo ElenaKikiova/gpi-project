@@ -4,37 +4,57 @@ import { Tool } from "./Tool.js";
 
 const RectangleTool = class RectangleTool extends Tool {
 
+  keyDownListener;
+  keepRatio = false;
+
   constructor(){
     super();
   }
 
+  keyDownListener = (event) => {
+    this.keepRatio = event.key == "Shift";
+  }
+
+  startListeningForKeyHold = () => {
+    document.addEventListener("keydown", this.keyDownListener);
+  }
+  // stopListeningForKeyHold = () => {
+  //   document.removeEventListener("keydown", this.keyDownListener);
+  // }
+
   onMouseMovement = (event) => {
+    this.startListeningForKeyHold();
     const calculatedWidth = event.clientX - this.startX - 60;
     const calculatedHeight = event.clientY - this.startY - 60;
 
-    let widthLabel = {x: event.clientX - 100, y: event.clientY - 50};
-    let heightLabel = {x: event.clientX - 60, y: event.clientY - 90};
+    let widthLabel = {x: event.clientX - 60 - this.SizeLabelWidth.width(), y: event.clientY - 60 };
+    let heightLabel = {x: event.clientX - 60, y: event.clientY - 60 - this.SizeLabelHeight.height()};
 
     this.Element.width(Math.abs(calculatedWidth));
     this.Element.height(Math.abs(calculatedHeight));
 
-
     if(calculatedWidth < 0){
       this.Element.x(event.clientX - 60);
-      widthLabel = {x: event.clientX - 60, y: event.clientY - 50};
-      heightLabel = {x: event.clientX - 90, y: event.clientY - 90};
+      widthLabel = {x: event.clientX - 60, y: event.clientY - 60};
+      heightLabel = {x: event.clientX - 60 - this.SizeLabelHeight.width(), y: event.clientY - 60 - this.SizeLabelHeight.height()};
     }
     if(calculatedHeight < 0){
       this.Element.y(event.clientY - 60);
-      widthLabel = {x: event.clientX - 100, y: event.clientY - 80};
-      heightLabel = {x: event.clientX - 50, y: event.clientY - 50};
+      widthLabel = {x: event.clientX - 60 - this.SizeLabelWidth.width(), y: event.clientY - 60 - this.SizeLabelWidth.height()};
+      heightLabel = {x: event.clientX - 60, y: event.clientY - 60};
     }
 
     if(calculatedHeight < 0 && calculatedWidth < 0){
-      widthLabel = {x: event.clientX - 50, y: event.clientY - 80};
-      heightLabel = {x: event.clientX - 90, y: event.clientY - 50};
+      widthLabel = {x: event.clientX - 60, y: event.clientY - 60 - this.SizeLabelWidth.height()};
+      heightLabel = {x: event.clientX - 60 - this.SizeLabelHeight.width(), y: event.clientY - 60};
     }
 
+    if(this.keepRatio){
+      this.Element.height(this.Element.width());
+      widthLabel = {x: this.startX + this.Element.width() - 50, y: this.startY + this.Element.height()};
+      heightLabel = {x: this.startX + this.Element.width(), y: this.startY + this.Element.height() - 20};
+      console.log(heightLabel)
+    }
     this.setSizeLabels(widthLabel, heightLabel);
 
   };
