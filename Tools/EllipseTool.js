@@ -16,8 +16,8 @@ const EllipseTool = class EllipseTool extends Tool {
     const calculatedX = event.clientX - this.Element.width() - 60;
     const calculatedY = event.clientY - this.Element.height() - 60;
 
-    let widthLabel = {x: event.clientX - 100, y: event.clientY - 50};
-    let heightLabel = {x: event.clientX - 60, y: event.clientY - 90};
+    let widthLabel = {x: event.clientX - 60 - this.SizeLabelWidth.width(), y: event.clientY - 60 };
+    let heightLabel = {x: event.clientX - 60, y: event.clientY - 60 - this.SizeLabelHeight.height()};
 
     this.Element.x(calculatedX);
     this.Element.y(calculatedY);
@@ -25,29 +25,28 @@ const EllipseTool = class EllipseTool extends Tool {
     this.Element.width(Math.abs(calculatedWidth));
     this.Element.height(Math.abs(calculatedHeight));
 
-
     if(calculatedWidth < 0){
       this.Element.x(event.clientX - 60);
-      widthLabel = {x: event.clientX - 60, y: event.clientY - 50};
-      heightLabel = {x: event.clientX - 90, y: event.clientY - 90};
+      widthLabel = {x: event.clientX - 60, y: event.clientY - 60};
+      heightLabel = {x: event.clientX - 60 - this.SizeLabelHeight.width(), y: event.clientY - 60 - this.SizeLabelHeight.height()};
     }
     if(calculatedHeight < 0){
       this.Element.y(event.clientY - 60);
-      widthLabel = {x: event.clientX - 100, y: event.clientY - 80};
-      heightLabel = {x: event.clientX - 50, y: event.clientY - 50};
+      widthLabel = {x: event.clientX - 60 - this.SizeLabelWidth.width(), y: event.clientY - 60 - this.SizeLabelWidth.height()};
+      heightLabel = {x: event.clientX - 60, y: event.clientY - 60};
     }
 
     if(calculatedHeight < 0 && calculatedWidth < 0){
-      widthLabel = {x: event.clientX - 50, y: event.clientY - 80};
-      heightLabel = {x: event.clientX - 90, y: event.clientY - 50};
+      widthLabel = {x: event.clientX - 60, y: event.clientY - 60 - this.SizeLabelWidth.height()};
+      heightLabel = {x: event.clientX - 60 - this.SizeLabelHeight.width(), y: event.clientY - 60};
     }
 
     if(this.keepRatio){
       this.Element.height(this.Element.width());
-      widthLabel = {x: this.startX + this.Element.width() - 50, y: this.startY + this.Element.height()};
-      heightLabel = {x: this.startX + this.Element.width(), y: this.startY + this.Element.height() - 20};
+      widthLabel = {x: this.startX + this.Element.width() - this.SizeLabelWidth.width(), y: this.startY + this.Element.height()};
+      heightLabel = {x: this.startX + this.Element.width(), y: this.startY + this.Element.height() - this.SizeLabelHeight.height()};
     }
-    
+
     this.setSizeLabels(widthLabel, heightLabel);
   };
 
