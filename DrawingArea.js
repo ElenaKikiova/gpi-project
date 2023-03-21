@@ -12,7 +12,6 @@ const DrawingArea = class {
     this.width = getElement("#drawing-area").clientWidth;
     this.height = getElement("#drawing-area").clientHeight;
     this.Object = SVG().addTo('#drawing-area').size(this.width, this.height);
-    console.log(this.Object)
   }
 
   drawGrid(){
@@ -31,7 +30,6 @@ const DrawingArea = class {
   }
 
   getObject(){
-    console.log(this.Object);
     return this.Object;
   }
 
