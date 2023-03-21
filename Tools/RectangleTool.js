@@ -7,6 +7,7 @@ const RectangleTool = class RectangleTool extends Tool {
 
   constructor(){
     super();
+    this.ToolName = 'Rectangle';
   }
 
   onMouseMovement = (event) => {

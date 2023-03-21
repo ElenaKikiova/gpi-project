@@ -17,7 +17,7 @@ const DrawingArea = class {
   drawGrid(){
     for(let x = this.gridSize; x < this.width; x++){
       let line = this.Object.line(0, this.height, 0, 0).move(x, 0);
-      line.stroke({ color: '#333', width: 0.1, linecap: 'round' })
+      line.stroke({ color: '#333', width: 0.1, linecap: 'round' });
       x += (this.gridSize - 1);
     }
 

@@ -3,6 +3,7 @@ import { getDrawingAreaCoordinates, getElement } from "../helpers.js";
 
 const Tool = class {
   Element;
+  ToolName;
   SizeLabelWidth = new SizeLabel();
   SizeLabelHeight = new SizeLabel();
   DrawingArea;
@@ -20,7 +21,7 @@ const Tool = class {
 
   onToolClicked = () => {
     this.activeTool = true;
-    // document.body.style.cursor = 'crosshair';
+    document.body.style.cursor = 'crosshair';
     this.listenForFistClick();
   }
   
@@ -55,7 +56,10 @@ const Tool = class {
       this.listenForFistClick();
     }
     this.stopListeningForShiftHold();
-    this.Element.stroke({ color: 'transparent' });
+
+    if(this.ToolName != 'Line'){
+      this.Element.stroke({ color: 'transparent' });
+    }
   };
 
   onMouseMovement = (event) => {
@@ -76,7 +80,9 @@ const Tool = class {
   
     this.drawElement();
 
-    this.Element.stroke({ color: '#444', width: 1, linecap: 'round', dasharray: '3, 3' });
+    if(this.ToolName != 'Line'){
+      this.Element.stroke({ color: '#444', width: 1, linecap: 'round', dasharray: '3, 3' });
+    }
     
     setTimeout(() => {
       getElement("#drawing-area").addEventListener("mouseup", this.onSecondPointClicked);
