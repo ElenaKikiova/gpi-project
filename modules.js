@@ -13,6 +13,7 @@ const RectangleToolInstance = new RectangleTool();
 const EllipseToolInstance = new EllipseTool();
 
 const ColorPickerObject = new ColorPicker();
+getElement("#lineWidthTool").style.visibility = "hidden";
 
 getElement("#lineTool").addEventListener("click", () => {
   EllipseToolInstance.onToolChanged();

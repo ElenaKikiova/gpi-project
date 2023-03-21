@@ -20,6 +20,11 @@ const Tool = class {
   }
 
   onToolClicked = () => {
+    /* is implemented in the Tools extending this class */
+    this.internal_onToolClicked();
+  }
+
+  internal_onToolClicked = () => {
     this.activeTool = true;
     document.body.style.cursor = 'crosshair';
     this.listenForFistClick();
@@ -44,6 +49,11 @@ const Tool = class {
   }
 
   onToolChanged = () => {
+    /* is implemented in the Tools extending this class */
+    this.internal_onToolChanged();
+  }
+
+  internal_onToolChanged = () => {
     this.activeTool = false;
     getElement("#drawing-area").removeEventListener("mousedown", this.onFirstPointClicked);
     getElement("#drawing-area").removeEventListener("mousemove", this.onMouseMovement);

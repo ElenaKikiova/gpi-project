@@ -10,6 +10,16 @@ const LineTool = class LineTool extends Tool {
     this.ToolName = 'Line';
   }
 
+  onToolClicked = () => {
+    getElement("#lineWidthTool").style.visibility = "visible";
+    this.internal_onToolClicked();
+  }
+
+  onToolChanged = () => {
+    getElement("#lineWidthTool").style.visibility = "hidden";
+    this.internal_onToolChanged();
+  }
+
   onMouseMovement = (event) => {
     this.startListeningForShiftHold();
 
@@ -57,7 +67,7 @@ const LineTool = class LineTool extends Tool {
     this.Element = SVGArea.getObject()
       .line(1, 1, 0, 0)
       .move(this.startX, this.startY)
-      .stroke({ color: ColorPickerObject.getColor(), width: 1,  linecap: 'round' })
+      .stroke({ color: ColorPickerObject.getColor(), width: getElement("#lineWidth").value,  linecap: 'round' })
       .opacity(getElement("#opacity").value);
   }
   

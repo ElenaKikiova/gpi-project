@@ -28,6 +28,15 @@ body {
       padding: 0 1rem;
     }
 
+    input[type="number"]{
+      padding: 0.35rem;
+      width: 2rem;
+      background-color: transparent;
+      color: inherit;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 5px;
+    }
+
   #flex{
     width: 100%;
     display: flex;

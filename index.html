@@ -14,6 +14,18 @@
 
     <div id="menu">
       <div class="menu-item"><span>Vector drawing JS project</span></div>
+
+      <div class="menu-item" id="opacityTool">
+        <label>Opacity
+          <input type="number" step="0.1" min="0" max="1" id="opacity" value="1">
+        </label>
+      </div>
+      <div class="menu-item" id="lineWidthTool">
+        <label>Line width
+          <input type="number" step="1" min="1" max="50" id="lineWidth" value="1">  
+        </label>
+      </div>
+
     </div>
 
     <div id="flex">
@@ -27,9 +39,6 @@
         </div>
         <div class="tool" id="ellipseTool">
           <i class="fa fa-circle" aria-hidden="true"></i>
-        </div>
-        <div class="tool" id="opacityTool">
-          <input type="number" step="0.1" min="0" max="1" id="opacity" value="1">
         </div>
         <div class="tool" id="colorPickerTool">
           <input type="color" id="color-picker">
