@@ -1,3 +1,4 @@
+import { getElement } from "../helpers.js";
 import { SVGArea } from "../Main.js";
 import { ColorPickerObject } from "../modules.js";
 import { Tool } from "./Tool.js";
@@ -57,7 +58,11 @@ const EllipseTool = class EllipseTool extends Tool {
   };
 
   drawElement = () => {
-    this.Element = SVGArea.getObject().ellipse(1, 1).move(this.startX, this.startY + 5).fill(ColorPickerObject.getColor());
+    this.Element = SVGArea.getObject()
+      .ellipse(1, 1)
+      .move(this.startX, this.startY + 5)
+      .fill(ColorPickerObject.getColor())
+      .opacity(getElement("#opacity").value);
   }
 
 }

@@ -1,4 +1,4 @@
-import { getDrawingAreaCoordinates } from "../helpers.js";
+import { getDrawingAreaCoordinates, getElement } from "../helpers.js";
 import { SVGArea } from "../Main.js";
 import { ColorPickerObject } from "../modules.js";
 import { Tool } from "./Tool.js";
@@ -54,7 +54,11 @@ const LineTool = class LineTool extends Tool {
   };
 
   drawElement = () => {
-    this.Element = SVGArea.getObject().line(1, 1, 0, 0).move(this.startX, this.startY + 5).stroke({ color: ColorPickerObject.getColor(), width: 1,  linecap: 'round' });
+    this.Element = SVGArea.getObject()
+      .line(1, 1, 0, 0)
+      .move(this.startX, this.startY)
+      .stroke({ color: ColorPickerObject.getColor(), width: 1,  linecap: 'round' })
+      .opacity(getElement("#opacity").value);
   }
   
 }
