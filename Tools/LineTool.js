@@ -1,4 +1,4 @@
-import { getDrawingAreaCoordinates, getElement } from "../helpers.js";
+import { getClientCursorXY, getElement } from "../helpers.js";
 import { SVGArea } from "../Main.js";
 import { ColorPickerObject } from "../modules.js";
 import { Tool } from "./Tool.js";
@@ -23,7 +23,7 @@ const LineTool = class LineTool extends Tool {
   onMouseMovement = (event) => {
     this.startListeningForShiftHold();
 
-    const [clientX, clientY] = getDrawingAreaCoordinates(event);
+    const [clientX, clientY] = getClientCursorXY(event);
 
     const corners = {
       tl: {x: this.startX, y: this.startY },

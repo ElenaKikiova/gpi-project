@@ -1,6 +1,6 @@
 const getElement = (selector) => document.querySelector(selector);
 
-const getDrawingAreaCoordinates = (event) => [event.clientX - 60, event.clientY - 60];
+const getClientCursorXY = (event) => [event.clientX - 60, event.clientY - 60];
 
 const getLineLength = (Element) => {
   const points = Element.array();
@@ -11,4 +11,4 @@ const getLineLength = (Element) => {
   return Math.sqrt( Math.pow(Math.abs(x1 - x2), 2) + Math.pow(Math.abs(y1 - y2), 2) );
 }
 
-export { getElement, getDrawingAreaCoordinates, getLineLength };
+export { getElement, getClientCursorXY, getLineLength };

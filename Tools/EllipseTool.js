@@ -1,4 +1,4 @@
-import { getElement } from "../helpers.js";
+import { getClientCursorXY, getElement } from "../helpers.js";
 import { SVGArea } from "../Main.js";
 import { ColorPickerObject } from "../modules.js";
 import { Tool } from "./Tool.js";
@@ -12,11 +12,14 @@ const EllipseTool = class EllipseTool extends Tool {
 
   onMouseMovement = (event) => {
     this.startListeningForShiftHold();
-    const calculatedWidth = event.clientX - this.startX - 60;
-    const calculatedHeight = event.clientY - this.startY - 60;
 
-    const calculatedX = event.clientX - this.Element.width() - 60;
-    const calculatedY = event.clientY - this.Element.height() - 60;
+    const [clientX, clientY] = getClientCursorXY(event);
+
+    const calculatedWidth = clientX - this.startX;
+    const calculatedHeight = clientY - this.startY;
+
+    const calculatedX = clientX - this.Element.width();
+    const calculatedY = clientY - this.Element.height();
 
     const corners = {
       tl: {x: this.startX, y: this.startY },
@@ -33,19 +36,19 @@ const EllipseTool = class EllipseTool extends Tool {
     this.Element.height(Math.abs(calculatedHeight));
 
     if(calculatedWidth < 0){
-      this.Element.x(event.clientX - 60);
-      widthLabel = {x: event.clientX - 60, y: event.clientY - 60};
-      heightLabel = {x: event.clientX - 60 - this.SizeLabelHeight.width(), y: event.clientY - 60 - this.SizeLabelHeight.height()};
+      this.Element.x(clientX);
+      widthLabel = {x: clientX, y: clientY};
+      heightLabel = {x: clientX - this.SizeLabelHeight.width(), y: clientY - this.SizeLabelHeight.height()};
     }
     if(calculatedHeight < 0){
-      this.Element.y(event.clientY - 60);
-      widthLabel = {x: event.clientX - 60 - this.SizeLabelWidth.width(), y: event.clientY - 60 - this.SizeLabelWidth.height()};
-      heightLabel = {x: event.clientX - 60, y: event.clientY - 60};
+      this.Element.y(clientY);
+      widthLabel = {x: clientX - this.SizeLabelWidth.width(), y: clientY - this.SizeLabelWidth.height()};
+      heightLabel = {x: clientX, y: clientY};
     }
 
     if(calculatedHeight < 0 && calculatedWidth < 0){
-      widthLabel = {x: event.clientX - 60, y: event.clientY - 60 - this.SizeLabelWidth.height()};
-      heightLabel = {x: event.clientX - 60 - this.SizeLabelHeight.width(), y: event.clientY - 60};
+      widthLabel = {x: clientX, y: clientY - this.SizeLabelWidth.height()};
+      heightLabel = {x: clientX - this.SizeLabelHeight.width(), y: clientY};
     }
 
     if(this.shiftHold){

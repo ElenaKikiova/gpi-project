@@ -1,5 +1,5 @@
 import { SizeLabel } from "../SizeLabel.js";
-import { getDrawingAreaCoordinates, getElement, getLineLength } from "../helpers.js";
+import { getClientCursorXY, getElement, getLineLength } from "../helpers.js";
 
 const Tool = class {
   Element;
@@ -92,7 +92,7 @@ const Tool = class {
   }
 
   onFirstPointClicked = (event) => {
-    [this.startX, this.startY] = getDrawingAreaCoordinates(event);
+    [this.startX, this.startY] = getClientCursorXY(event);
   
     this.drawElement();
 
