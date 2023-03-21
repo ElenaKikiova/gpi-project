@@ -46,7 +46,7 @@ const RectangleTool = class RectangleTool extends Tool {
       heightLabel = {x: clientX - this.SizeLabelHeight.width(), y: clientY};
     }
 
-    if(this.keepRatio){
+    if(this.shiftHold){
       this.Element.height(this.Element.width());
       widthLabel = {x: this.startX + this.Element.width() - this.SizeLabelWidth.width(), y: this.startY + this.Element.height()};
       heightLabel = {x: this.startX + this.Element.width(), y: this.startY + this.Element.height() - this.SizeLabelHeight.height()};

@@ -47,7 +47,7 @@ const EllipseTool = class EllipseTool extends Tool {
       heightLabel = {x: event.clientX - 60 - this.SizeLabelHeight.width(), y: event.clientY - 60};
     }
 
-    if(this.keepRatio){
+    if(this.shiftHold){
       this.Element.height(this.Element.width());
       widthLabel = {x: this.startX + this.Element.width() - this.SizeLabelWidth.width(), y: this.startY + this.Element.height()};
       heightLabel = {x: this.startX + this.Element.width(), y: this.startY + this.Element.height() - this.SizeLabelHeight.height()};

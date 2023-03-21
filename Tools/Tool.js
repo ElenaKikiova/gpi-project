@@ -1,5 +1,5 @@
 import { SizeLabel } from "../SizeLabel.js";
-import { getDrawingAreaCoordinates, getElement } from "../helpers.js";
+import { getDrawingAreaCoordinates, getElement, getLineLength } from "../helpers.js";
 
 const Tool = class {
   Element;
@@ -13,7 +13,7 @@ const Tool = class {
 
   activeTool;
   
-  keepRatio = false;
+  shiftHold = false;
 
   constructor(){
     this.activeTool = false;
@@ -26,10 +26,10 @@ const Tool = class {
   }
   
   keyDownListener = (event) => {
-    this.keepRatio = (event.key == "Shift");
+    this.shiftHold = (event.key == "Shift");
   }
   keyUpListener = (event) => {
-    this.keepRatio = false;
+    this.shiftHold = false;
   }
 
   startListeningForShiftHold = () => {
@@ -38,7 +38,7 @@ const Tool = class {
   }
 
   stopListeningForShiftHold = () => {
-    this.keepRatio = false;
+    this.shiftHold = false;
     document.removeEventListener("keydown", this.keyDownListener);
     document.removeEventListener("keyup", this.keyUpListener);
   }
@@ -67,8 +67,14 @@ const Tool = class {
   };
 
   setSizeLabels = (widthLabel, heightLabel) => {
-    this.SizeLabelWidth.setLabel(this.Element.width().toString(), widthLabel.x, widthLabel.y);
-    this.SizeLabelHeight.setLabel(this.Element.height().toString(), heightLabel.x, heightLabel.y);
+    if(heightLabel){
+      this.SizeLabelWidth.setLabel(this.Element.width().toString(), widthLabel.x, widthLabel.y);
+      this.SizeLabelHeight.setLabel(this.Element.height().toString(), heightLabel.x, heightLabel.y);
+    }
+    else {
+      let len = getLineLength(this.Element);
+      this.SizeLabelWidth.setLabel(Math.round(len).toString(), widthLabel.x, widthLabel.y);
+    }
   }
 
   drawElement = () => {
