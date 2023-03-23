@@ -33,9 +33,7 @@ const SizeLabel = class {
   }
 
   destroyLabel = () => {
-    console.log('called dest')
     if(this.initialised) {
-      console.log('Destroy label', this.Label)
       this.initialised = false;
       this.LabelGroup.remove();
       this.LabelBox.remove();

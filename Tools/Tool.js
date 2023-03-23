@@ -12,7 +12,7 @@ const Tool = class {
   startY;
 
   activeTool;
-  cursor;
+  cursor = 'crosshair';
   
   shiftHold = false;
 
@@ -27,8 +27,10 @@ const Tool = class {
 
   internal_onToolClicked = () => {
     this.activeTool = true;
-    document.body.style.cursor = this.cursor || 'crosshair';
-    this.listenForFistClick();
+    document.body.style.cursor = this.cursor;
+    if(this.ToolName != 'Select'){
+      this.listenForFistClick();
+    }
   }
   
   keyDownListener = (event) => {
@@ -90,7 +92,6 @@ const Tool = class {
   }
 
   destorySizeLabels = () => {
-    console.log("TOOTOEEEEEEEEEEEEEO")
     this.SizeLabelWidth.destroyLabel();
     this.SizeLabelHeight.destroyLabel();
   }

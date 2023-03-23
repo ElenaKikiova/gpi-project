@@ -1,3 +1,5 @@
+import { AppToolbox } from "../Main.js";
+
 const Shape = class Shape {
   
   Element;
@@ -7,11 +9,12 @@ const Shape = class Shape {
   constructor(SVGElement){
     this.Element = SVGElement;
     console.log(SVGElement);
-    this.Element.addEventListener("click", () => console.log('e'));
+    this.Element.node.addEventListener("click", this.onSelected);
   }
 
   onSelected = (event) => {
-
+    console.log(event);
+    console.log(AppToolbox.currentTool);
   }
 
 }
