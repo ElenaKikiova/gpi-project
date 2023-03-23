@@ -1,6 +1,7 @@
 import { getClientCursorXY, getElement } from "../helpers.js";
 import { SVGArea } from "../Main.js";
 import { ColorPickerObject } from "../modules.js";
+import { Shape } from "../Shapes/Shape.js";
 import { Tool } from "./Tool.js";
 
 const EllipseTool = class EllipseTool extends Tool {
@@ -66,6 +67,8 @@ const EllipseTool = class EllipseTool extends Tool {
       .move(this.startX, this.startY + 5)
       .fill(ColorPickerObject.getColor())
       .opacity(getElement("#opacity").value);
+
+    const NewEllipse = new Shape(this.Element);
   }
 
 }

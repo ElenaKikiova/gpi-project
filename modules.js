@@ -1,4 +1,3 @@
-import { DrawingArea } from "./DrawingArea.js";
 import { getElement } from "./helpers.js";
 import { RectangleTool } from "./Tools/RectangleTool.js";
 import { SVGArea } from "./Main.js";
@@ -8,29 +7,34 @@ import { LineTool } from "./Tools/LineTool.js";
 
 
 SVGArea.drawGrid();
-const LineToolInstance = new LineTool();
-const RectangleToolInstance = new RectangleTool();
-const EllipseToolInstance = new EllipseTool();
+
+const ToolInstances = {
+  Line: new LineTool(),
+  Rectangle: new RectangleTool(),
+  Ellipse: new EllipseTool()
+};
+
+const chooseTool = (ToolName) => {
+  Object.keys(ToolInstances).forEach(toolName => {
+    console.log(ToolInstances[toolName])
+    ToolInstances[toolName].onToolChanged();
+  });
+  ToolInstances[ToolName].onToolClicked();
+}
 
 const ColorPickerObject = new ColorPicker();
 getElement("#lineWidthTool").style.visibility = "hidden";
 
 getElement("#lineTool").addEventListener("click", () => {
-  EllipseToolInstance.onToolChanged();
-  RectangleToolInstance.onToolChanged();
-  LineToolInstance.onToolClicked();
+  chooseTool('Line');
 });
 
 getElement("#rectangleTool").addEventListener("click", () => {
-  EllipseToolInstance.onToolChanged();
-  LineToolInstance.onToolChanged();
-  RectangleToolInstance.onToolClicked();
+  chooseTool('Rectangle');
 });
 
 getElement("#ellipseTool").addEventListener("click", () => {
-  RectangleToolInstance.onToolChanged();
-  LineToolInstance.onToolChanged();
-  EllipseToolInstance.onToolClicked();
+  chooseTool('Ellipse');
 });
 
 export { ColorPickerObject }

@@ -12,6 +12,7 @@ const Tool = class {
   startY;
 
   activeTool;
+  cursor;
   
   shiftHold = false;
 
@@ -26,7 +27,7 @@ const Tool = class {
 
   internal_onToolClicked = () => {
     this.activeTool = true;
-    document.body.style.cursor = 'crosshair';
+    document.body.style.cursor = this.cursor || 'crosshair';
     this.listenForFistClick();
   }
   
@@ -55,6 +56,7 @@ const Tool = class {
 
   internal_onToolChanged = () => {
     this.activeTool = false;
+    this.destorySizeLabels();
     getElement("#drawing-area").removeEventListener("mousedown", this.onFirstPointClicked);
     getElement("#drawing-area").removeEventListener("mousemove", this.onMouseMovement);
     getElement("#drawing-area").removeEventListener("mousedown", this.onSecondPointClicked);
@@ -87,6 +89,12 @@ const Tool = class {
     }
   }
 
+  destorySizeLabels = () => {
+    console.log("TOOTOEEEEEEEEEEEEEO")
+    this.SizeLabelWidth.destroyLabel();
+    this.SizeLabelHeight.destroyLabel();
+  }
+
   drawElement = () => {
     /* is implemented in the Tools extending this class */
   }
@@ -97,7 +105,7 @@ const Tool = class {
     this.drawElement();
 
     if(this.ToolName != 'Line'){
-      this.Element.stroke({ color: '#444', width: 1, linecap: 'round', dasharray: '3, 3' });
+      this.Element.stroke({ color: '#666', width: 2, linecap: 'round', dasharray: '5, 5' });
     }
     
     setTimeout(() => {
@@ -113,6 +121,7 @@ const Tool = class {
     this.startY = null;
     getElement("#drawing-area").addEventListener("mousedown", this.onFirstPointClicked);
   }
+
 }
 
 export { Tool };

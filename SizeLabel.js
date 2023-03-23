@@ -9,12 +9,15 @@ const SizeLabel = class {
   x;
   y;
 
-  calculateLabelWidth(text){
+  initialised;
+
+  calculateLabelWidth = (text) => {
     return 10 + text.length * 8;
   }
 
-  setLabel(text, x, y){
-    if(!this.Label){
+  setLabel = (text, x, y) => {
+    if(!this.initialised){
+      this.initialised = true;
       this.LabelGroup = SVGArea.getObject().group();
       this.LabelBox = SVGArea.getObject().rect(10, 19).radius(5).x(5).y(5);
       this.Label = SVGArea.getObject().text(text).x(10).y(7);
@@ -27,6 +30,17 @@ const SizeLabel = class {
     this.Label.text(text);
     this.LabelBox.width(this.calculateLabelWidth(text));
     this.LabelGroup.move(x + 5, y + 10);
+  }
+
+  destroyLabel = () => {
+    console.log('called dest')
+    if(this.initialised) {
+      console.log('Destroy label', this.Label)
+      this.initialised = false;
+      this.LabelGroup.remove();
+      this.LabelBox.remove();
+      this.Label.remove();
+    }
   }
 
   width = () => this.LabelBox?.width() + 10;
