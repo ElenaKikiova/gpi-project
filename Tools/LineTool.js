@@ -1,6 +1,7 @@
 import { getClientCursorXY, getElement } from "../helpers.js";
 import { SVGArea } from "../Main.js";
 import { ColorPickerObject } from "../modules.js";
+import { Shape } from "../Shapes/Shape.js";
 import { Tool } from "./Tool.js";
 
 const LineTool = class LineTool extends Tool {
@@ -27,7 +28,7 @@ const LineTool = class LineTool extends Tool {
 
     const corners = {
       tl: {x: this.startX, y: this.startY },
-      br: {x: this.startX + this.Element.width(), y: this.startY + this.Element.height()},
+      br: {x: this.startX + this.ShapeElement.width(), y: this.startY + this.ShapeElement.height()},
     }
 
     const differenceX = clientX - this.startX;
@@ -35,7 +36,7 @@ const LineTool = class LineTool extends Tool {
 
     let label = {x: corners.br.x - this.SizeLabelWidth.width(), y: corners.br.y };
 
-    this.Element.plot(this.startX, this.startY, clientX, clientY);
+    this.ShapeElement.plot(this.startX, this.startY, clientX, clientY);
     
     if(differenceX < 0){
       label = {x: clientX, y: clientY};
@@ -50,12 +51,12 @@ const LineTool = class LineTool extends Tool {
 
     if(this.shiftHold){
       if(Math.abs(differenceX) < Math.abs(differenceY)){
-        this.Element.plot(this.startX, this.startY, this.startX, clientY);
-        label = {x: this.Element.x(), y: clientY - this.SizeLabelWidth.height()};
+        this.ShapeElement.plot(this.startX, this.startY, this.startX, clientY);
+        label = {x: this.ShapeElement.x(), y: clientY - this.SizeLabelWidth.height()};
       }
       else {
-        this.Element.plot(this.startX, this.startY, clientX, this.startY);
-        label = {x: clientX - this.SizeLabelWidth.width(), y: this.Element.y()};
+        this.ShapeElement.plot(this.startX, this.startY, clientX, this.startY);
+        label = {x: clientX - this.SizeLabelWidth.width(), y: this.ShapeElement.y()};
       }
     }
 
@@ -64,11 +65,13 @@ const LineTool = class LineTool extends Tool {
   };
 
   drawElement = () => {
-    this.Element = SVGArea.getObject()
+    let element = SVGArea.getObject()
       .line(1, 1, 0, 0)
       .move(this.startX, this.startY)
       .stroke({ color: ColorPickerObject.getColor(), width: getElement("#lineWidth").value,  linecap: 'round' })
       .opacity(getElement("#opacity").value);
+
+      this.ShapeElement = new Shape(element);
   }
   
 }

@@ -1,6 +1,7 @@
 import { getClientCursorXY, getElement } from "../helpers.js";
 import { SVGArea } from "../Main.js";
 import { ColorPickerObject } from "../modules.js";
+import { Shape } from "../Shapes/Shape.js";
 import { Tool } from "./Tool.js";
 
 const RectangleTool = class RectangleTool extends Tool {
@@ -20,23 +21,23 @@ const RectangleTool = class RectangleTool extends Tool {
 
     const corners = {
       tl: {x: this.startX, y: this.startY },
-      br: {x: this.startX + this.Element.width(), y: this.startY + this.Element.height()},
+      br: {x: this.startX + this.ShapeElement.width(), y: this.startY + this.ShapeElement.height()},
     }
 
     let widthLabel = {x: corners.br.x - this.SizeLabelWidth.width(), y: corners.br.y };
     let heightLabel = {x: corners.br.x, y: corners.br.y - this.SizeLabelHeight.height()};
 
-    this.Element.width(Math.abs(calculatedWidth));
-    this.Element.height(Math.abs(calculatedHeight));
+    this.ShapeElement.width(Math.abs(calculatedWidth));
+    this.ShapeElement.height(Math.abs(calculatedHeight));
 
     
     if(calculatedWidth < 0){
-      this.Element.x(this.startX - this.Element.width());
+      this.ShapeElement.x(this.startX - this.ShapeElement.width());
       widthLabel = {x: clientX, y: clientY};
       heightLabel = {x: clientX - this.SizeLabelHeight.width(), y: clientY - this.SizeLabelHeight.height()};
     }
     if(calculatedHeight < 0){
-      this.Element.y(clientY);
+      this.ShapeElement.y(clientY);
       widthLabel = {x: clientX - this.SizeLabelWidth.width(), y: clientY - this.SizeLabelWidth.height()};
       heightLabel = {x: clientX, y: clientY};
     }
@@ -47,9 +48,9 @@ const RectangleTool = class RectangleTool extends Tool {
     }
 
     if(this.shiftHold){
-      this.Element.height(this.Element.width());
-      widthLabel = {x: this.startX + this.Element.width() - this.SizeLabelWidth.width(), y: this.startY + this.Element.height()};
-      heightLabel = {x: this.startX + this.Element.width(), y: this.startY + this.Element.height() - this.SizeLabelHeight.height()};
+      this.ShapeElement.height(this.ShapeElement.width());
+      widthLabel = {x: this.startX + this.ShapeElement.width() - this.SizeLabelWidth.width(), y: this.startY + this.ShapeElement.height()};
+      heightLabel = {x: this.startX + this.ShapeElement.width(), y: this.startY + this.ShapeElement.height() - this.SizeLabelHeight.height()};
     }
     
     this.setSizeLabels(widthLabel, heightLabel);
@@ -57,10 +58,12 @@ const RectangleTool = class RectangleTool extends Tool {
   };
 
   drawElement = () => {
-    this.Element = SVGArea.getObject()
+    let element = SVGArea.getObject()
       .rect(1, 1).move(this.startX, this.startY + 5)
       .fill(ColorPickerObject.getColor())
       .opacity(getElement("#opacity").value);
+
+      this.ShapeElement = new Shape(element);
   }
   
 }

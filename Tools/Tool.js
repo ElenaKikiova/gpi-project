@@ -2,7 +2,7 @@ import { SizeLabel } from "../SizeLabel.js";
 import { getClientCursorXY, getElement, getLineLength } from "../helpers.js";
 
 const Tool = class {
-  Element;
+  ShapeElement;
   ToolName;
   SizeLabelWidth = new SizeLabel();
   SizeLabelHeight = new SizeLabel();
@@ -61,10 +61,10 @@ const Tool = class {
     this.destorySizeLabels();
     getElement("#drawing-area").removeEventListener("mousedown", this.onFirstPointClicked);
     getElement("#drawing-area").removeEventListener("mousemove", this.onMouseMovement);
-    getElement("#drawing-area").removeEventListener("mousedown", this.onSecondPointClicked);
+    getElement("#drawing-area").removeEventListener("mouseup", this.onSecondPointClicked);
   }
   
-  onSecondPointClicked = () => {
+  onSecondPointClicked = (event) => {
     getElement("#drawing-area").removeEventListener("mousemove", this.onMouseMovement);
     if(this.activeTool){
       this.listenForFistClick();
@@ -72,7 +72,7 @@ const Tool = class {
     this.stopListeningForShiftHold();
 
     if(this.ToolName != 'Line'){
-      this.Element.stroke({ color: 'transparent' });
+      this.ShapeElement.removeActiveBorder();
     }
   };
 
@@ -82,11 +82,11 @@ const Tool = class {
 
   setSizeLabels = (widthLabel, heightLabel) => {
     if(heightLabel){
-      this.SizeLabelWidth.setLabel(this.Element.width().toString(), widthLabel.x, widthLabel.y);
-      this.SizeLabelHeight.setLabel(this.Element.height().toString(), heightLabel.x, heightLabel.y);
+      this.SizeLabelWidth.setLabel(this.ShapeElement.width().toString(), widthLabel.x, widthLabel.y);
+      this.SizeLabelHeight.setLabel(this.ShapeElement.height().toString(), heightLabel.x, heightLabel.y);
     }
     else {
-      let len = getLineLength(this.Element);
+      let len = getLineLength(this.ShapeElement);
       this.SizeLabelWidth.setLabel(Math.round(len).toString(), widthLabel.x, widthLabel.y);
     }
   }
@@ -106,7 +106,7 @@ const Tool = class {
     this.drawElement();
 
     if(this.ToolName != 'Line'){
-      this.Element.stroke({ color: '#666', width: 2, linecap: 'round', dasharray: '5, 5' });
+      this.ShapeElement.addActiveBorder();
     }
     
     setTimeout(() => {
