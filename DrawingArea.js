@@ -34,8 +34,12 @@ const DrawingArea = class {
 
   }
 
-  getObject(){
+  getObject = () => {
     return this.Object;
+  }
+
+  getNode = () => {
+    return this.Object.node;
   }
 
 }

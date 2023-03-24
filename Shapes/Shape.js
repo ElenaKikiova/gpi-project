@@ -1,3 +1,4 @@
+import { getElement } from "../helpers.js";
 import { AppToolbox } from "../Main.js";
 
 const Shape = class Shape {
@@ -33,11 +34,26 @@ const Shape = class Shape {
     this.Element.stroke({ color: 'transparent' });
   }
 
+  onKeyPress = (event) => {
+    if(event.key)
+    console.log(event.key);
+
+    if(event.key === 'Backspace' || event.key === 'Delete'){
+      this.Element.remove();
+    }
+
+    
+  }
+
   onSelected = (event) => {
     if(AppToolbox.currentTool === 'Select'){
       console.log(event);
 
       this.addActiveBorder();
+
+      AppToolbox.tools['Select'].select(this.Element);
+
+      document.addEventListener("keyup", this.onKeyPress);
     }
   }
 
