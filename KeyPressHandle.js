@@ -9,10 +9,8 @@ const KeyPressHandle = class {
   }
 
   onKeyPress = (event) => {
-    // console.log(event);
     this.history.unshift(event.key);
     if(this.history.length > 5) this.history = this.history.splice(0, 4);
-    console.log(this.history);
 
     this.selectToolKeyCombinations();
   };
@@ -22,10 +20,14 @@ const KeyPressHandle = class {
       // copy
       if((this.history[0] === 'c' && this.history[1] === 'Control') || (this.history[1] === 'c' && this.history[0] === 'Control')){
         AppToolbox.tools['Select'].copy();
+        this.history = [];
       }
       // paste
       if((this.history[0] === 'v' && this.history[1] === 'Control') || (this.history[1] === 'v' && this.history[0] === 'Control')){
+        console.log('PASTE')
+        console.log(this.history);
         AppToolbox.tools['Select'].paste();
+        this.history = [];
       }
     }
   }

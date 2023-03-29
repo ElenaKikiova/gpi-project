@@ -1,5 +1,6 @@
 import { SizeLabel } from "../SizeLabel.js";
 import { getClientCursorXY, getElement, getLineLength } from "../helpers.js";
+import { AppShapes } from "../Shapes/Shapes.js";
 
 const Tool = class {
   ShapeElement;
@@ -108,6 +109,8 @@ const Tool = class {
     if(this.ToolName != 'Line'){
       this.ShapeElement.addActiveBorder();
     }
+    
+    AppShapes.addShape(this.ShapeElement);
     
     setTimeout(() => {
       getElement("#drawing-area").addEventListener("mouseup", this.onSecondPointClicked);

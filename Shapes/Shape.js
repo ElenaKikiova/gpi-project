@@ -1,5 +1,6 @@
 import { getElement } from "../helpers.js";
 import { AppToolbox } from "../Main.js";
+import { AppShapes } from "./Shapes.js";
 
 const Shape = class Shape {
   
@@ -8,7 +9,6 @@ const Shape = class Shape {
   ShapeName;
 
   constructor(SVGElement){
-    console.log(SVGElement);
     this.Element = SVGElement;
     this.Element.node.addEventListener("click", this.onSelected);
   }
@@ -35,26 +35,25 @@ const Shape = class Shape {
   }
 
   onKeyPress = (event) => {
-    if(event.key)
-    console.log(event.key);
-
     if(event.key === 'Backspace' || event.key === 'Delete'){
       this.Element.remove();
+      AppShapes.removeShape(this);
     }
-
-    
   }
 
   onSelected = (event) => {
     if(AppToolbox.currentTool === 'Select'){
-      console.log(event);
-
       this.addActiveBorder();
 
-      AppToolbox.tools['Select'].select(this.Element);
+      AppToolbox.tools['Select'].select(this);
 
       document.addEventListener("keyup", this.onKeyPress);
     }
+  }
+
+  onDeselected = () => {
+    this.removeActiveBorder();
+    document.removeEventListener("keyup", this.onKeyPress);
   }
 
 }
