@@ -28,6 +28,7 @@ const SelectTool = class SelectTool extends Tool {
   }
 
   selectClick = (event) => {
+    // if click is outside any element, deselect them all
     if(event.target.nodeName === 'svg'){
       AppShapes.deselectAllShapes();
       this.pasteCount = 0;
