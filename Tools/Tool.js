@@ -72,7 +72,6 @@ const Tool = class {
     }
     this.stopListeningForShiftHold();
 
-    console.log(this.ToolName)
     this.ShapeElement.removeActiveBorder();
   };
 

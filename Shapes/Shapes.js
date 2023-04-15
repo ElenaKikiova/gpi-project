@@ -1,23 +1,64 @@
+import { getElement, toSentenceCase } from "../helpers.js";
+
 const Shapes = class {
 
   all;
+  counter
 
   constructor(){
     this.all = [];
+    this.counter = {'rect': 0, 'ellipse': 0, 'line': 0};
   }
 
   addShape = (shape) => {
     this.all.push(shape);
+    this.counter[shape.Type] = this.counter[shape.Type] + 1;
+    const listItem = this.generateShapesListItem(shape);
+    listItem.addEventListener('click', () => this.listItemSelected(shape));
+    getElement('#shapes-list').appendChild(listItem);
   }
 
   removeShape = (shape) => {
     const index = this.all.indexOf(shape);
+    this.counter[shape.Type] = this.counter[shape.Type] - 1;
+    getElement('#shapes-list').removeChild(getElement(`#${shape.ID}`));
     this.all.splice(index, 1);
   }
 
   deselectAllShapes = () => {
     this.all.forEach((shape) => {
       shape.onDeselected();
+    })
+  }
+
+  generateShapeId = (shape) => {
+    return shape.type + '_' + (this.all.length > 0 ? Number(this.all[this.all.length - 1].ID.split('_')[1]) + 1 : 0);
+  }
+
+  generateShapeName = (shape) => {
+    console.log(shape)
+    return toSentenceCase(shape.type) + ' ' + Number(this.counter[shape.type] + 1);
+  }
+  
+  listItemSelected = (shape) => {
+    console.log(shape)
+  }
+
+  generateShapesListItem = (shape) => {
+    let shapeItem = document.createElement('template');
+    shapeItem.innerHTML = `<div class="list-shape-item" id='${shape.ID}'> 
+      <div class="title">${shape.Title}</div>
+    </div>`;
+    return shapeItem.content.firstChild;
+  }
+
+
+  renderShapesList = () => {
+    const list = getElement('#shapes-list');
+    
+    this.all.forEach((shape) => {
+      let shapeItem = this.generateShapesListItem(shape);
+      list.appendChild(shapeItem)
     })
   }
 

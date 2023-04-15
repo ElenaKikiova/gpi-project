@@ -4,6 +4,7 @@ import { AppShapes } from "./Shapes.js";
 
 const Shape = class Shape {
   
+  ID;
   Element;
   Title;
   Type;
@@ -15,8 +16,10 @@ const Shape = class Shape {
 
 
   constructor(SVGElement){
+    this.ID = AppShapes.generateShapeId(SVGElement);
     this.Element = SVGElement;
     this.Element.node.addEventListener("click", this.onSelected);
+    this.Title = AppShapes.generateShapeName(SVGElement);
     this.Type = this.Element.type;
   }
 

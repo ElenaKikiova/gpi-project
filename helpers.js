@@ -11,4 +11,6 @@ const getLineLength = (ShapeElement) => {
   return Math.sqrt( Math.pow(Math.abs(x1 - x2), 2) + Math.pow(Math.abs(y1 - y2), 2) );
 }
 
-export { getElement, getClientCursorXY, getLineLength };
+const toSentenceCase = (string) => string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+
+export { getElement, getClientCursorXY, getLineLength, toSentenceCase };
