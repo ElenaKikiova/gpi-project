@@ -54,12 +54,12 @@ const Shape = class Shape {
       document.addEventListener("keyup", this.onKeyPress);
 
       document.addEventListener("mousedown", this.beginDragging)
-      document.addEventListener("mouseup", this.stopDragging)
     }
   }
 
   beginDragging = (event) => {
     console.log('drag');
+    document.addEventListener("mouseup", this.stopDragging)
     /* save dragging position - what position inside the shape does the user hold at (xy)? */
     let [dragX, dragY] = getClientCursorXY(event);
     [this.dragHoldX, this.dragHoldY] = [dragX - this.Element.x(), dragY - this.Element.y()];
@@ -77,6 +77,7 @@ const Shape = class Shape {
     console.log('stop draggiing')
     document.removeEventListener("mousemove", this.dragElement)
     document.removeEventListener("mousedown", this.beginDragging)
+    document.removeEventListener("mouseup", this.stopDragging)
   }
 
   onDeselected = () => {
