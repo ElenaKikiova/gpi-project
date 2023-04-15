@@ -6,15 +6,18 @@ const Shape = class Shape {
   
   Element;
   Title;
+  Type;
   ShapeName;
 
-  /* draggin */
+  /* dragging */
   dragHoldX;
   dragHoldY;
+
 
   constructor(SVGElement){
     this.Element = SVGElement;
     this.Element.node.addEventListener("click", this.onSelected);
+    this.Type = this.Element.type;
   }
 
   width = () => this.Element.width();
@@ -31,11 +34,15 @@ const Shape = class Shape {
   getNode = () => this.Element.node;
 
   addActiveBorder = () => {
-    this.Element.stroke({ color: '#666', width: 2, linecap: 'round', dasharray: '5, 5' });
+    if(this.Element.type != 'line'){
+      this.Element.stroke({ color: '#666', width: 2, linecap: 'round', dasharray: '5, 5' });
+    }
   }
 
   removeActiveBorder = () => {
-    this.Element.stroke({ color: 'transparent' });
+    if(this.Element.type != 'line'){
+      this.Element.stroke({ color: 'transparent' });
+    }
   }
 
   onKeyPress = (event) => {

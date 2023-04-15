@@ -72,9 +72,8 @@ const Tool = class {
     }
     this.stopListeningForShiftHold();
 
-    if(this.ToolName != 'Line'){
-      this.ShapeElement.removeActiveBorder();
-    }
+    console.log(this.ToolName)
+    this.ShapeElement.removeActiveBorder();
   };
 
   onMouseMovement = (event) => {
@@ -106,9 +105,7 @@ const Tool = class {
   
     this.drawElement();
 
-    if(this.ToolName != 'Line'){
-      this.ShapeElement.addActiveBorder();
-    }
+    this.ShapeElement.addActiveBorder();
     
     AppShapes.addShape(this.ShapeElement);
     
