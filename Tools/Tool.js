@@ -78,6 +78,9 @@ const Tool = class {
     if(this.ShapeElement.width() > 1 && this.ShapeElement.height() > 1){
       AppShapes.addShape(this.ShapeElement);
     }
+    else {
+      this.ShapeElement.deleteShape();
+    }
   };
 
   onMouseMovement = (event) => {

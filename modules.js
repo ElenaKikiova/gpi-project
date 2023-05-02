@@ -24,17 +24,6 @@ AppShapes.actions.forEach((action) => {
   })
 });
 
-// getElement("#deleteAction").addEventListener("click", () => {
-//   if(AppShapes.selectedShapeID){
-//     AppShapes.deleteActionClicked();
-//   }
-// })
-
-// getElement("#renameAction").addEventListener("click", () => {
-//   if(AppShapes.selectedShapeID){
-//     AppShapes.renameActionClicked();
-//   }
-// })
 
 getElement("#downloadImage").addEventListener("click", () => {
   SVGArea.downloadImage();
