@@ -1,4 +1,4 @@
-import { getClientCursorXY, getElement } from "../helpers.js";
+import { getClientCursorXY, getElement, getOpacity } from "../helpers.js";
 import { SVGArea } from "../Main.js";
 import { ColorPickerObject } from "../modules.js";
 import { Shape } from "../Shapes/Shape.js";
@@ -69,7 +69,7 @@ const LineTool = class LineTool extends Tool {
       .line(1, 1, 0, 0)
       .move(this.startX, this.startY)
       .stroke({ color: ColorPickerObject.getColor(), width: getElement("#lineWidth").value,  linecap: 'round' })
-      .opacity(getElement("#opacity").value);
+      .opacity(getOpacity());
 
       this.ShapeElement = new Shape(element);
   }

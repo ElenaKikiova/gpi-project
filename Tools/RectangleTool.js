@@ -1,4 +1,4 @@
-import { getClientCursorXY, getElement } from "../helpers.js";
+import { getClientCursorXY, getElement, getOpacity } from "../helpers.js";
 import { SVGArea } from "../Main.js";
 import { ColorPickerObject } from "../modules.js";
 import { Shape } from "../Shapes/Shape.js";
@@ -61,7 +61,7 @@ const RectangleTool = class RectangleTool extends Tool {
     let element = SVGArea.getImage()
       .rect(1, 1).move(this.startX, this.startY + 5)
       .fill(ColorPickerObject.getColor())
-      .opacity(getElement("#opacity").value);
+      .opacity(getOpacity());
 
       this.ShapeElement = new Shape(element);
   }
