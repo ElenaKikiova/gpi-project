@@ -56,8 +56,10 @@ const Shape = class Shape {
   }
 
   onSelected = () => {
-    if(AppToolbox.currentTool === 'Select'){
+    if(AppToolbox.currentTool === 'Select' || AppShapes.selectedShapeID === this.ID){
       this.addActiveBorder();
+      
+      AppShapes.selectShapeListItem(this.ID);
 
       AppToolbox.tools['Select'].select(this);
 
@@ -92,6 +94,7 @@ const Shape = class Shape {
 
   onDeselected = () => {
     this.removeActiveBorder();
+    AppShapes.deselectShapeListItem(this.ID);
     document.removeEventListener("keyup", this.onKeyPress);
   }
 

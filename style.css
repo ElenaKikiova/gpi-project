@@ -109,3 +109,8 @@ body {
         border: 1px solid rgba(255, 255, 255, 0.2);
         cursor: pointer;
       }
+
+      .list-shape-item.selected {
+        outline: 1px solid rgba(255, 255, 255, 0.5); /* inner stroke */
+        outline-offset: -2px;  /* negative border width + outline width */
+      }

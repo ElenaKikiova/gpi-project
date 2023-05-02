@@ -3,11 +3,16 @@ import { getElement, toSentenceCase } from "../helpers.js";
 const Shapes = class {
 
   all;
-  counter
+  counter;
+  selectedShapeID;
 
   constructor(){
     this.all = [];
     this.counter = {'rect': 0, 'ellipse': 0, 'line': 0};
+  }
+
+  getShapeByID = (shapeId) => {
+    return this.all.find((s) => s.ID === shapeId);
   }
 
   addShape = (shape) => {
@@ -31,6 +36,14 @@ const Shapes = class {
     })
   }
 
+  selectShapeListItem = (shapeId) => {
+    getElement(`.list-shape-item#${shapeId}`).classList.add('selected');
+  }
+
+  deselectShapeListItem = (shapeId) => {
+    getElement(`.list-shape-item#${shapeId}`).classList.remove('selected');
+  }
+
   generateShapeId = (shape) => {
     return shape.type + '_' + (this.all.length > 0 ? Number(this.all[this.all.length - 1].ID.split('_')[1]) + 1 : 0);
   }
@@ -41,7 +54,12 @@ const Shapes = class {
   }
   
   listItemSelected = (shape) => {
-    console.log(shape)
+    console.log(shape);
+    if(this.selectedShapeID){
+      this.getShapeByID(this.selectedShapeID).onDeselected();
+    }
+    this.selectedShapeID = shape.ID;
+    shape.onSelected();
   }
 
   generateShapesListItem = (shape) => {
