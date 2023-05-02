@@ -11,22 +11,29 @@ const getLineLength = (ShapeElement) => {
   return Math.sqrt( Math.pow(Math.abs(x1 - x2), 2) + Math.pow(Math.abs(y1 - y2), 2) );
 }
 
+const validateNumberInput = (value, min, max) => {
+  if(value < min) value = min;
+  if(value > max) value = max;
+  return value;
+}
+
 const getOpacity = () => {
   
-  let opacity = getElement("#opacity").value;
+  let opacity = validateNumberInput(getElement("#opacity").value, 0.1, 1);
 
-  if(opacity < 0.1){
-    opacity = 0.1;
-  }
-  else if(opacity > 1){
-    opacity = 1;
-  }
-  
   getElement("#opacity").value = opacity;
 
   return opacity;
 }
 
+const getLineWidth = () => {
+  let width = validateNumberInput(getElement("#lineWidth").value, 1, 100);
+
+  getElement("#lineWidth").value = width;
+
+  return width;
+}
+
 const toSentenceCase = (string) => string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 
-export { getElement, getClientCursorXY, getLineLength, toSentenceCase, getOpacity };
+export { getElement, getClientCursorXY, getLineLength, toSentenceCase, getOpacity, getLineWidth };

@@ -1,4 +1,4 @@
-import { getClientCursorXY, getElement, getOpacity } from "../helpers.js";
+import { getClientCursorXY, getElement, getLineWidth, getOpacity } from "../helpers.js";
 import { SVGArea } from "../Main.js";
 import { ColorPickerObject } from "../modules.js";
 import { Shape } from "../Shapes/Shape.js";
@@ -68,7 +68,7 @@ const LineTool = class LineTool extends Tool {
     let element = SVGArea.getImage()
       .line(1, 1, 0, 0)
       .move(this.startX, this.startY)
-      .stroke({ color: ColorPickerObject.getColor(), width: getElement("#lineWidth").value,  linecap: 'round' })
+      .stroke({ color: ColorPickerObject.getColor(), width: getLineWidth(), linecap: 'round' })
       .opacity(getOpacity());
 
       this.ShapeElement = new Shape(element);
