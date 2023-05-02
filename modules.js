@@ -6,7 +6,8 @@ import { AppShapes } from "./Shapes/Shapes.js";
 SVGArea.drawGrid();
 
 const ColorPickerObject = new ColorPicker();
-getElement("#lineWidthTool").style.visibility = "hidden";
+getElement("#lineWidthInput").style.visibility = "hidden";
+getElement("#opacityInput").style.visibility = "hidden";
 
 getElement("#selectTool").addEventListener("click", () => {
   AppToolbox.chooseTool('Select');
@@ -28,5 +29,9 @@ getElement("#showShapes").addEventListener("click", () => {
   console.log('All shapes', AppShapes.all);
   console.log('Selected shapes', AppToolbox.tools['Select'].selectedElements)
 });
+
+getElement("#deleteAction").addEventListener("click", () => {
+  AppShapes.deleteActionClicked();
+})
 
 export { ColorPickerObject }

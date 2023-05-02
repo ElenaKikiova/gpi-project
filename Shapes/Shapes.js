@@ -15,6 +15,10 @@ const Shapes = class {
     return this.all.find((s) => s.ID === shapeId);
   }
 
+  getSelectedShape = () => {
+    return this.getShapeByID(this.selectedShapeID);
+  }
+
   addShape = (shape) => {
     this.all.push(shape);
     this.counter[shape.Type] = this.counter[shape.Type] + 1;
@@ -28,6 +32,7 @@ const Shapes = class {
     this.counter[shape.Type] = this.counter[shape.Type] - 1;
     getElement('#shapes-list').removeChild(getElement(`#${shape.ID}`));
     this.all.splice(index, 1);
+    this.selectedShapeID = null;
   }
 
   deselectAllShapes = () => {
@@ -78,6 +83,13 @@ const Shapes = class {
       let shapeItem = this.generateShapesListItem(shape);
       list.appendChild(shapeItem)
     })
+  }
+
+  deleteActionClicked = () => {
+    console.log(this.selectedShapeID, this.getShapeByID(this.selectedShapeID))
+    const shape = this.getShapeByID(this.selectedShapeID);
+    shape.deleteShape();
+    this.selectedShapeID = null;
   }
 
 }

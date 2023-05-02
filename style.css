@@ -101,6 +101,8 @@ body {
     #shapes {
       width: 200px;
       max-width: 25vw;
+      display: flex;
+      flex-direction: column;
     }
 
       .list-shape-item{
@@ -110,7 +112,32 @@ body {
         cursor: pointer;
       }
 
+      .list-shape-item:hover, .list-shape-item.selected{
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+
       .list-shape-item.selected {
         outline: 1px solid rgba(255, 255, 255, 0.5); /* inner stroke */
         outline-offset: -2px;  /* negative border width + outline width */
+      }
+
+      .action {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+
+      #actions {
+        margin-top: auto;
+      }
+
+      .action:hover{
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+        
+      .action > i{
+        font-size: 1.5rem;
       }

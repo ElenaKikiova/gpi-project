@@ -73,6 +73,7 @@ const Tool = class {
     this.stopListeningForShiftHold();
 
     this.ShapeElement.removeActiveBorder();
+    AppShapes.selectedShapeID = null;
   };
 
   onMouseMovement = (event) => {

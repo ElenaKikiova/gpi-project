@@ -48,22 +48,21 @@ const Shape = class Shape {
     }
   }
 
-  onKeyPress = (event) => {
-    if(event.key === 'Backspace' || event.key === 'Delete'){
-      this.Element.remove();
-      AppShapes.removeShape(this);
-    }
+  deleteShape = () => {
+    this.Element.remove();
+    this.onDeselected();
+    AppShapes.removeShape(this);
   }
 
   onSelected = () => {
     if(AppToolbox.currentTool === 'Select' || AppShapes.selectedShapeID === this.ID){
       this.addActiveBorder();
+
+      AppShapes.selectedShapeID = this.ID;
       
       AppShapes.selectShapeListItem(this.ID);
 
       AppToolbox.tools['Select'].select(this);
-
-      document.addEventListener("keyup", this.onKeyPress);
 
       document.addEventListener("mousedown", this.beginDragging)
     }
@@ -94,8 +93,8 @@ const Shape = class Shape {
 
   onDeselected = () => {
     this.removeActiveBorder();
+    AppShapes.selectedShapeID = this.ID;
     AppShapes.deselectShapeListItem(this.ID);
-    document.removeEventListener("keyup", this.onKeyPress);
   }
 
 }

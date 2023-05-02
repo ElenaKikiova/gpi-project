@@ -1,4 +1,5 @@
 import { AppToolbox } from "./Main.js";
+import { AppShapes } from "./Shapes/Shapes.js";
 
 const KeyPressHandle = class {
 
@@ -16,7 +17,12 @@ const KeyPressHandle = class {
   };
 
   selectToolKeyCombinations = () => {
+    if(this.history[0] === 'Backspace' || this.history[0] === 'Delete'){
+      if(AppShapes.getSelectedShape()) AppShapes.getSelectedShape().deleteShape();
+    }
     if(AppToolbox.currentTool === 'Select'){
+
+
       // copy
       if((this.history[0] === 'c' && this.history[1] === 'Control') || (this.history[1] === 'c' && this.history[0] === 'Control')){
         AppToolbox.tools['Select'].copy();
