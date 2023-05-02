@@ -69,7 +69,6 @@ const Shape = class Shape {
   }
 
   beginDragging = (event) => {
-    console.log('drag');
     document.addEventListener("mouseup", this.stopDragging)
     /* save dragging position - what position inside the shape does the user hold at (xy)? */
     let [dragX, dragY] = getClientCursorXY(event);
@@ -78,14 +77,12 @@ const Shape = class Shape {
   }
 
   dragElement = (event) => {
-    console.log('drags', event, this.dragHoldX, this.dragHoldY);
     /* drag the shape, setting it's xy the client xy minus the position at which the user is holding the shape */
     const [x, y] = getClientCursorXY(event);
     this.Element.move(x - this.dragHoldX, y - this.dragHoldY)
   }
 
   stopDragging = () => {
-    console.log('stop draggiing')
     document.removeEventListener("mousemove", this.dragElement)
     document.removeEventListener("mousedown", this.beginDragging)
     document.removeEventListener("mouseup", this.stopDragging)
@@ -95,6 +92,11 @@ const Shape = class Shape {
     this.removeActiveBorder();
     AppShapes.selectedShapeID = this.ID;
     AppShapes.deselectShapeListItem(this.ID);
+  }
+
+  renameShape = (name) => {
+    this.Title = name;
+    AppShapes.finishRenaming(this);
   }
 
 }

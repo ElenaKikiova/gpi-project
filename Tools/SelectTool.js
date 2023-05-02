@@ -39,7 +39,6 @@ const SelectTool = class SelectTool extends Tool {
   }
 
   select = (shape) => {
-    console.log('select', shape)
     if(this.selectedElements.indexOf(shape) == -1) this.selectedElements.push(shape);
   }
 

@@ -54,12 +54,10 @@ const Shapes = class {
   }
 
   generateShapeName = (shape) => {
-    console.log(shape)
     return toSentenceCase(shape.type) + ' ' + Number(this.counter[shape.type] + 1);
   }
   
   listItemSelected = (shape) => {
-    console.log(shape);
     if(this.selectedShapeID){
       this.getShapeByID(this.selectedShapeID).onDeselected();
     }
@@ -86,10 +84,18 @@ const Shapes = class {
   }
 
   deleteActionClicked = () => {
-    console.log(this.selectedShapeID, this.getShapeByID(this.selectedShapeID))
     const shape = this.getShapeByID(this.selectedShapeID);
     shape.deleteShape();
     this.selectedShapeID = null;
+  }
+
+  renameActionClicked = () => {
+    const shape = this.getShapeByID(this.selectedShapeID);
+    getElement(`.list-shape-item#${shape.ID}`).innerHTML = `<input type="text" id="newName" value="${shape.Title}" autofocus>`;
+  }
+
+  finishRenaming = (shape) => {
+    getElement(`.list-shape-item#${shape.ID}`).innerHTML = `<div class="title">${shape.Title}</div>`
   }
 
 }

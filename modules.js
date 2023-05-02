@@ -34,4 +34,8 @@ getElement("#deleteAction").addEventListener("click", () => {
   AppShapes.deleteActionClicked();
 })
 
+getElement("#renameAction").addEventListener("click", () => {
+  AppShapes.renameActionClicked();
+})
+
 export { ColorPickerObject }
