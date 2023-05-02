@@ -74,6 +74,10 @@ const Tool = class {
 
     this.ShapeElement.removeActiveBorder();
     AppShapes.selectedShapeID = null;
+    
+    if(this.ShapeElement.width() > 1 && this.ShapeElement.height() > 1){
+      AppShapes.addShape(this.ShapeElement);
+    }
   };
 
   onMouseMovement = (event) => {
@@ -106,8 +110,6 @@ const Tool = class {
     this.drawElement();
 
     this.ShapeElement.addActiveBorder();
-    
-    AppShapes.addShape(this.ShapeElement);
     
     setTimeout(() => {
       getElement("#drawing-area").addEventListener("mouseup", this.onSecondPointClicked);

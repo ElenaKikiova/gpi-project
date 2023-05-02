@@ -5,6 +5,7 @@ const Shapes = class {
   all;
   counter;
   selectedShapeID;
+  actions = ['delete', 'rename'];
 
   constructor(){
     this.all = [];
@@ -83,19 +84,26 @@ const Shapes = class {
     })
   }
 
-  deleteActionClicked = () => {
-    const shape = this.getShapeByID(this.selectedShapeID);
-    shape.deleteShape();
-    this.selectedShapeID = null;
-  }
-
-  renameActionClicked = () => {
-    const shape = this.getShapeByID(this.selectedShapeID);
-    getElement(`.list-shape-item#${shape.ID}`).innerHTML = `<input type="text" id="newName" value="${shape.Title}" autofocus>`;
+  shapeActionClicked = (action) => {
+    const shape = this.getSelectedShape();
+    if(action === 'delete'){
+      // delete shape option
+      shape.deleteShape();
+      this.selectedShapeID = null;
+    }
+    else {
+      // rename shape option
+      getElement(`.list-shape-item#${shape.ID}`).innerHTML = `<input type="text" id="newName" value="${shape.Title}">`;
+      getElement('#newName').select();
+      // if user clicks away, cancel changes
+      getElement('#newName').addEventListener("focusout", () => {
+        this.finishRenaming(shape);
+      })
+    }
   }
 
   finishRenaming = (shape) => {
-    getElement(`.list-shape-item#${shape.ID}`).innerHTML = `<div class="title">${shape.Title}</div>`
+    getElement(`.list-shape-item#${shape.ID}`).innerHTML = `<div class="title">${shape.Title}</div>`;
   }
 
 }

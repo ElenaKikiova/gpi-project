@@ -13,7 +13,7 @@
   <div id="wrapper">
 
     <div id="menu">
-      <div class="menu-item"><span>Vector drawing JS project</span></div>
+      <div class="menu-item" id="title"><span>Vector drawing JS project</span></div>
 
       <div class="menu-item" id="opacityInput">
         <label>Opacity
@@ -26,30 +26,30 @@
         </label>
       </div>
 
-      <button id="showShapes">s</button>
-
-      <button id="downloadImage">download</button>
+      <button id="downloadImage">
+        <i class="fa fa-download" aria-hidden="true"></i>
+      </button>
 
     </div>
 
     <div id="flex">
 
       <div id="tools">
-        <div class="tool" id="selectTool">
+        <button class="tool" id="selectTool">
           <i class="fa fa-mouse-pointer" aria-hidden="true"></i>
-        </div>
-        <div class="tool" id="lineTool">
+        </button>
+        <button class="tool" id="lineTool">
           <i class="fa fa-minus" aria-hidden="true"></i>
-        </div>
-        <div class="tool" id="rectangleTool">
+        </button>
+        <button class="tool" id="rectangleTool">
           <i class="fa fa-square" aria-hidden="true"></i>
-        </div>
-        <div class="tool" id="ellipseTool">
+        </button>
+        <button class="tool" id="ellipseTool">
           <i class="fa fa-circle" aria-hidden="true"></i>
-        </div>
-        <div class="tool" id="colorPickerTool">
+        </button>
+        <button class="tool" id="colorPickerTool">
           <input type="color" id="color-picker">
-        </div>
+        </button>
       </div>
 
       <div id="drawing-area">
@@ -61,12 +61,12 @@
 
         </div>
         <div id="actions">
-          <div class="action" id="renameAction">
+          <button class="action" id="rename">
             <i class="fa fa-pencil" aria-hidden="true"></i>
-          </div>
-          <div class="action" id="deleteAction">
+          </button>
+          <button class="action" id="delete">
             <i class="fa fa-trash-o" aria-hidden="true"></i>
-          </div>
+          </button>
         </div>
       </div>
 

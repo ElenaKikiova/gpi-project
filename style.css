@@ -6,10 +6,28 @@ body {
   font: 15px Verdana;
 }
 
+*{
+  box-sizing: border-box;
+}
+
+button{
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  transition: 0.1s linear;
+  font-size: 1.25rem;
+}
+
+button:hover:not(#colorPickerTool){
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+  
+
 #wrapper{
   width: 100vw;
   height: 100vh;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
 }
@@ -18,6 +36,9 @@ body {
     width: 100%;
     height: 60px;
     display: flex;
+    z-index: 1000;
+    border-bottom: 2px solid orange;
+    box-shadow: 0px 1px 5px 0px orange
   }
 
     .menu-item {
@@ -28,13 +49,32 @@ body {
       padding: 0 1rem;
     }
 
-    input[type="number"]{
+    .menu-item.selected{
+      color: orange;
+    }
+
+    #title {
+      color: orange;
+      font-weight: bold;
+    }
+
+    input[type="number"], input[type="text"]{
       padding: 0.35rem;
-      width: 2rem;
       background-color: transparent;
       color: inherit;
       border: 2px solid rgba(255, 255, 255, 0.1);
       border-radius: 5px;
+    }
+
+    input[type="number"]{
+      width: 2rem;
+    }
+
+    #downloadImage {
+      width: 60px;
+      height: 60px;
+      margin-left: auto;
+      color: orange;
     }
 
   #flex{
@@ -55,19 +95,12 @@ body {
 
       .tool {
         width: 60px;
-        height: 60px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 1.5rem;
-        cursor: pointer;
-        
+        height: 60px;       
+        font-size: 1.5rem; 
       }
 
       .tool#colorPickerTool{
-        width: 50px;
-        height: 50px;
-        margin: auto 5px 5px 5px;
+        margin-top: auto;
       }
 
       #color-picker{
@@ -112,6 +145,11 @@ body {
         cursor: pointer;
       }
 
+      .list-shape-item input {
+        width: calc(100% - 0.9rem);
+        font-size: 1rem;
+      }
+
       .list-shape-item:hover, .list-shape-item.selected{
         background-color: rgba(255, 255, 255, 0.2);
       }
@@ -124,20 +162,12 @@ body {
       .action {
         width: 40px;
         height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
       }
 
       #actions {
         margin-top: auto;
       }
 
-      .action:hover{
-        background-color: rgba(255, 255, 255, 0.2);
-      }
-        
       .action > i{
         font-size: 1.5rem;
       }
