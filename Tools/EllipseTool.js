@@ -62,7 +62,7 @@ const EllipseTool = class EllipseTool extends Tool {
   };
 
   drawElement = () => {
-    let element = SVGArea.getObject()
+    let element = SVGArea.getImage()
       .ellipse(1, 1)
       .move(this.startX, this.startY + 5)
       .fill(ColorPickerObject.getColor())

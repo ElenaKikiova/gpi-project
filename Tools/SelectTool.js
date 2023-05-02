@@ -49,14 +49,14 @@ const SelectTool = class SelectTool extends Tool {
   paste = () => {
     if(this.selectedElements){
       this.pasteCount++;
-      console.log('paste', this.selectedElements, SVGArea.getNode());
+      console.log('paste', this.selectedElements);
 
       this.selectedElements.forEach((el) => {
         const cloneSVG = SVG(el.Element.node.cloneNode());
         const cloneShape = new Shape(cloneSVG);
         AppShapes.addShape(cloneShape);
         cloneSVG.move(cloneSVG.x() + 20*this.pasteCount, cloneSVG.y() + 20 * this.pasteCount);
-        SVGArea.getObject().add(cloneSVG);
+        SVGArea.getImage().add(cloneSVG);
       })
     }
   }

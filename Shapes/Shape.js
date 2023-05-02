@@ -34,8 +34,6 @@ const Shape = class Shape {
   plot = (x1, y1, x2, y2) => this.Element.plot(x1, y1, x2, y2);
   array = () => this.Element.array();
 
-  getNode = () => this.Element.node;
-
   addActiveBorder = () => {
     if(this.Element.type != 'line'){
       this.Element.stroke({ color: '#666', width: 2, linecap: 'round', dasharray: '5, 5' });

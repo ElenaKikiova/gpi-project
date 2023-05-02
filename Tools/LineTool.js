@@ -65,7 +65,7 @@ const LineTool = class LineTool extends Tool {
   };
 
   drawElement = () => {
-    let element = SVGArea.getObject()
+    let element = SVGArea.getImage()
       .line(1, 1, 0, 0)
       .move(this.startX, this.startY)
       .stroke({ color: ColorPickerObject.getColor(), width: getElement("#lineWidth").value,  linecap: 'round' })

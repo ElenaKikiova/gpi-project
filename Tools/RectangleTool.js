@@ -58,7 +58,7 @@ const RectangleTool = class RectangleTool extends Tool {
   };
 
   drawElement = () => {
-    let element = SVGArea.getObject()
+    let element = SVGArea.getImage()
       .rect(1, 1).move(this.startX, this.startY + 5)
       .fill(ColorPickerObject.getColor())
       .opacity(getElement("#opacity").value);

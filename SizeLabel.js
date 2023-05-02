@@ -18,9 +18,10 @@ const SizeLabel = class {
   setLabel = (text, x, y) => {
     if(!this.initialised){
       this.initialised = true;
-      this.LabelGroup = SVGArea.getObject().group();
-      this.LabelBox = SVGArea.getObject().rect(10, 19).radius(5).x(5).y(5);
-      this.Label = SVGArea.getObject().text(text).x(10).y(7);
+      const object = SVGArea.getObject();
+      this.LabelGroup = object.group();
+      this.LabelBox = object.rect(10, 19).radius(5).x(5).y(5);
+      this.Label = object.text(text).x(10).y(7);
       this.LabelGroup.add(this.LabelPadding);
       this.LabelGroup.add(this.LabelBox);
       this.LabelGroup.add(this.Label);

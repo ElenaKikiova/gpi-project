@@ -2,7 +2,11 @@ import { getElement } from "./helpers.js";
 
 const DrawingArea = class {
 
+  // Object: holds the groups for grid and labels
   Object;
+  // Image: contains only the drawn shapes
+  Image;
+
   width;
   height;
 
@@ -12,10 +16,11 @@ const DrawingArea = class {
     this.width = getElement("#drawing-area").clientWidth;
     this.height = getElement("#drawing-area").clientHeight;
     this.Object = SVG().addTo('#drawing-area').size(this.width, this.height);
+    this.Image = this.Object.group().attr('id', 'image');
   }
 
   drawGrid(){
-    const gridGroup = this.Object.group();
+    const gridGroup = this.Object.group().attr('id', 'grid')
     for(let x = this.gridSize; x < this.width; x++){
       let line = this.Object.line(0, this.height, 0, 0).move(x, 0);
       line.stroke({ color: '#333', width: 0.1, linecap: 'round' });
@@ -38,8 +43,8 @@ const DrawingArea = class {
     return this.Object;
   }
 
-  getNode = () => {
-    return this.Object.node;
+  getImage = () => {
+    return this.Image;
   }
 
 }
