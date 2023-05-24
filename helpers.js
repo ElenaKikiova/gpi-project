@@ -1,3 +1,5 @@
+import { AppShapes } from "./Shapes/Shapes.js";
+
 const getElement = (selector) => document.querySelector(selector);
 
 const getClientCursorXY = (event) => [event.clientX - 60, event.clientY - 60];
@@ -34,6 +36,39 @@ const getLineWidth = () => {
   return width;
 }
 
+const listenForResizing = () => {
+  getElement("#widthInput").style.display = "flex";
+  getElement("#heightInput").style.display = "flex";
+
+  getElement("#width").addEventListener("input", resizeWidth);
+  getElement("#height").addEventListener("input", resizeHeight);
+}
+// for removeEventListener
+const resizeWidth = () => resizeShape("width");
+const resizeHeight = () => resizeShape("height");
+
+const resizeShape = (param) => {
+  
+  let value = validateNumberInput(getElement(`#${param}`).value, 1, 2000);
+
+  if(AppShapes.getSelectedShape()){
+    console.log('set size', param, value)
+    if(param === 'width') AppShapes.getSelectedShape().width(value);
+    if(param === 'height') AppShapes.getSelectedShape().width(value);
+  }
+}
+
+const stopTrackingSizes = () => {
+  getElement("#widthInput").style.display = "none";
+  getElement("#heightInput").style.display = "none";
+  getElement("#width").removeEventListener("input", resizeWidth);
+  getElement("#height").removeEventListener("input", resizeHeight);
+}
+
+const existsFocusedInput = () => {
+  return getElement("input:focus");
+}
+
 const toSentenceCase = (string) => string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 
-export { getElement, getClientCursorXY, getLineLength, toSentenceCase, getOpacity, getLineWidth };
+export { getElement, getClientCursorXY, getLineLength, toSentenceCase, getOpacity, getLineWidth, listenForResizing, stopTrackingSizes, existsFocusedInput };

@@ -1,6 +1,6 @@
 import { AppToolbox } from "./Main.js";
 import { AppShapes } from "./Shapes/Shapes.js";
-import { getElement } from "./helpers.js";
+import { existsFocusedInput, getElement } from "./helpers.js";
 
 const KeyPressHandle = class {
 
@@ -19,8 +19,10 @@ const KeyPressHandle = class {
 
   selectToolKeyCombinations = () => {
 
+    console.log(existsFocusedInput());
+
     // hanlde delete shape
-    if(this.history[0] === 'Backspace' || this.history[0] === 'Delete' && !getElement('#newName') ){
+    if((this.history[0] === 'Backspace' || this.history[0] === 'Delete') && !existsFocusedInput()){
       if(AppShapes.getSelectedShape()) AppShapes.getSelectedShape().deleteShape();
     }
 
@@ -29,7 +31,7 @@ const KeyPressHandle = class {
       AppShapes.getSelectedShape().renameShape(getElement('#newName').value);
     }
 
-    if(AppToolbox.currentTool === 'Select'){
+    if(AppToolbox.currentTool === 'Select' && !existsFocusedInput()){
       // copy
       if((this.history[0] === 'c' && this.history[1] === 'Control') || (this.history[1] === 'c' && this.history[0] === 'Control')){
         AppToolbox.tools['Select'].copy();

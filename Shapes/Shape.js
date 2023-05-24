@@ -1,4 +1,4 @@
-import { getClientCursorXY, getElement } from "../helpers.js";
+import { getClientCursorXY, getElement, stopTrackingSizes, listenForResizing } from "../helpers.js";
 import { AppToolbox } from "../Main.js";
 import { AppShapes } from "./Shapes.js";
 
@@ -62,8 +62,7 @@ const Shape = class Shape {
 
       AppToolbox.tools['Select'].select(this);
 
-      getElement("#widthInput").style.display = "flex";
-      getElement("#heightInput").style.display = "flex";
+      listenForResizing();
       getElement("#width").value = this.width();
       getElement("#height").value = this.height();
 
@@ -95,6 +94,7 @@ const Shape = class Shape {
     this.removeActiveBorder();
     AppShapes.selectedShapeID = this.ID;
     AppShapes.deselectShapeListItem(this.ID);
+    stopTrackingSizes();
   }
 
   renameShape = (name) => {
