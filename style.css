@@ -67,7 +67,7 @@ button:hover:not(#colorPickerTool){
     }
 
     input[type="number"]{
-      width: 3rem;
+      width: 5rem;
     }
 
     #downloadImage {

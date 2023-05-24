@@ -12,12 +12,12 @@ const LineTool = class LineTool extends Tool {
   }
 
   onToolClicked = () => {
-    getElement("#lineWidthInput").style.visibility = "visible";
+    getElement("#lineWidthInput").style.display = "flex";
     this.internal_onToolClicked();
   }
 
   onToolChanged = () => {
-    getElement("#lineWidthInput").style.visibility = "hidden";
+    getElement("#lineWidthInput").style.display = "none";
     this.internal_onToolChanged();
   }
 

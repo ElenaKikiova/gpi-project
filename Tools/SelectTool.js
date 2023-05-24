@@ -16,13 +16,13 @@ const SelectTool = class SelectTool extends Tool {
   }
 
   onToolClicked = () => {
-    getElement("#opacityInput").style.visibility = "hidden";
+    getElement("#opacityInput").style.display = "none";
     getElement("#drawing-area").addEventListener("click", this.selectClick)
     this.internal_onToolClicked();
   }
 
   onToolChanged = () => {
-    getElement("#opacityInput").style.visibility = "visible";
+    getElement("#opacityInput").style.display = "flex";
     getElement("#drawing-area").removeEventListener("click", this.selectClick);
     this.selectedElements = [];
     AppShapes.deselectAllShapes();

@@ -62,7 +62,12 @@ const Shape = class Shape {
 
       AppToolbox.tools['Select'].select(this);
 
-      document.addEventListener("mousedown", this.beginDragging)
+      getElement("#widthInput").style.display = "flex";
+      getElement("#heightInput").style.display = "flex";
+      getElement("#width").value = this.width();
+      getElement("#height").value = this.height();
+
+      this.Element.node.addEventListener("mousedown", this.beginDragging)
     }
   }
 
@@ -82,7 +87,7 @@ const Shape = class Shape {
 
   stopDragging = () => {
     document.removeEventListener("mousemove", this.dragElement)
-    document.removeEventListener("mousedown", this.beginDragging)
+    this.Element.node.removeEventListener("mousedown", this.beginDragging)
     document.removeEventListener("mouseup", this.stopDragging)
   }
 

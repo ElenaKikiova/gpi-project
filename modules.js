@@ -6,8 +6,10 @@ import { AppShapes } from "./Shapes/Shapes.js";
 SVGArea.drawGrid();
 
 const ColorPickerObject = new ColorPicker();
-getElement("#lineWidthInput").style.visibility = "hidden";
-getElement("#opacityInput").style.visibility = "hidden";
+getElement("#lineWidthInput").style.display = "none";
+getElement("#opacityInput").style.display = "none";
+getElement("#widthInput").style.display = "none";
+getElement("#heightInput").style.display = "none";
 
 // add onclick listeners for all tools
 AppToolbox.toolNames.forEach((tool) => {
