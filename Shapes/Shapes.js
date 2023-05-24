@@ -61,7 +61,7 @@ const Shapes = class {
 
   generateShapeName = (shape) => {
     console.log(shape)
-    return toSentenceCase(shape.type === 'G' ? shape.type : 'imported image') + ' ' + Number(this.counter[shape.type] + 1);
+    return toSentenceCase(shape.type === 'g' ? 'imported image' : shape.type) + ' ' + Number(this.counter[shape.type] + 1);
   }
   
   listItemSelected = (shape) => {

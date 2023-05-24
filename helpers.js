@@ -66,7 +66,7 @@ const resizeShape = (param) => {
 
   if(AppShapes.getSelectedShape()){
     if(param === 'width') AppShapes.getSelectedShape().width(value);
-    if(param === 'height') AppShapes.getSelectedShape().width(value);
+    if(param === 'height') AppShapes.getSelectedShape().height(value);
   }
 }
 

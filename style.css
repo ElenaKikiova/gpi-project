@@ -72,35 +72,43 @@ button:hover:not(#colorPickerTool){
 
     #fileUploadGroup {
       position: relative;
-      width: 60px;
+      width: 120px;
+      margin-left: auto;
     }
 
     #openImage{
       position: absolute;
       top: 0px;
       left: 0px;
-      width: 60px;
       height: 60px;
       margin-left: auto;
+      display: flex;
       color: orange;
+      align-items: center;
     }
 
     #openedImageFile { 
-      height: 60px; width: 100%;
+      height: 60px; 
+      width: 100%;
       z-index: 1;
       opacity: 0;
       position: absolute;
       top: 0px;
       left: 0px;
-      width: 60px;
       height: 60px;
       cursor: pointer;
     }
 
     #downloadImage {
-      width: 60px;
       height: 60px;
+      display: flex;
       color: orange;
+      align-items: center;
+      margin-right: 1rem;
+    }
+
+    #downloadImage .fa, #openImage .fa {
+      margin-left: 0.5rem;
     }
 
   #flex{

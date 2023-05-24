@@ -78,15 +78,15 @@ const DrawingArea = class {
       reader.onload = function(event){
           var img = new Image();
           img.src = event.target.result;
-
-          let [width, height] = [0, 0];
           
           const imageGroup = that.Image.group();
-          const image = imageGroup.image(img.src, (event) => {
+          imageGroup.image(img.src, (event) => {
             width = event.target.naturalWidth;
             height = event.target.naturalHeight;
+
+            console.log(event.target.naturalHeight, event.target.naturalWidth)
             
-            const imageRect = imageGroup.rect(width, height).attr('class', 'image-rect').fill('transparent');
+            imageGroup.rect(event.target.naturalWidth, event.target.naturalHeight).attr('class', 'image-rect').fill('transparent');
             const shapeElement = new Shape(imageGroup);
             AppShapes.addShape(shapeElement);
             console.log('added img')
