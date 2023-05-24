@@ -20,7 +20,7 @@ const KeyPressHandle = class {
   selectToolKeyCombinations = () => {
 
     // hanlde delete shape
-    if(this.history[0] === 'Backspace' || this.history[0] === 'Delete'){
+    if(this.history[0] === 'Backspace' || this.history[0] === 'Delete' && !getElement('#newName') ){
       if(AppShapes.getSelectedShape()) AppShapes.getSelectedShape().deleteShape();
     }
 
