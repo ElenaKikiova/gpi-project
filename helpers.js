@@ -21,7 +21,7 @@ const validateNumberInput = (value, min, max) => {
 
 const getOpacity = () => {
   
-  let opacity = validateNumberInput(getElement("#opacity").value, 0.1, 1);
+  let opacity = validateNumberInput(getElement("#opacity").value, 0, 1);
 
   getElement("#opacity").value = opacity;
 
@@ -34,6 +34,19 @@ const getLineWidth = () => {
   getElement("#lineWidth").value = width;
 
   return width;
+}
+
+const listenForOpacityChange = () => {
+  getElement("#opacityInput").style.display = "flex";
+  getElement("#opacity").addEventListener("input", changeOpacity);
+}
+
+const changeOpacity = () => {
+  const opacity = validateNumberInput(getElement("#opacity").value, 0, 1);
+  
+  if(AppShapes.getSelectedShape()){
+    AppShapes.getSelectedShape().opacity(opacity);
+  }
 }
 
 const listenForResizing = () => {
@@ -52,17 +65,19 @@ const resizeShape = (param) => {
   let value = validateNumberInput(getElement(`#${param}`).value, 1, 2000);
 
   if(AppShapes.getSelectedShape()){
-    console.log('set size', param, value)
     if(param === 'width') AppShapes.getSelectedShape().width(value);
     if(param === 'height') AppShapes.getSelectedShape().width(value);
   }
 }
 
-const stopTrackingSizes = () => {
+const removeParamEventListeners = () => {
   getElement("#widthInput").style.display = "none";
   getElement("#heightInput").style.display = "none";
   getElement("#width").removeEventListener("input", resizeWidth);
   getElement("#height").removeEventListener("input", resizeHeight);
+  getElement("#opacityInput").style.display = "none";
+  getElement("#opacity").removeEventListener("input", changeOpacity);
+  getElement("#opacity").value = 1;
 }
 
 const existsFocusedInput = () => {
@@ -71,4 +86,4 @@ const existsFocusedInput = () => {
 
 const toSentenceCase = (string) => string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 
-export { getElement, getClientCursorXY, getLineLength, toSentenceCase, getOpacity, getLineWidth, listenForResizing, stopTrackingSizes, existsFocusedInput };
+export { getElement, getClientCursorXY, getLineLength, toSentenceCase, getOpacity, getLineWidth, listenForResizing, removeParamEventListeners, existsFocusedInput, listenForOpacityChange };

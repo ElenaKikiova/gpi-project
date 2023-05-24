@@ -1,4 +1,4 @@
-import { getClientCursorXY, getElement, stopTrackingSizes, listenForResizing } from "../helpers.js";
+import { getClientCursorXY, getElement, removeParamEventListeners, listenForResizing, listenForOpacityChange } from "../helpers.js";
 import { AppToolbox } from "../Main.js";
 import { AppShapes } from "./Shapes.js";
 
@@ -31,6 +31,8 @@ const Shape = class Shape {
   x = (x) => this.Element.x(x);
   y = () => this.Element.y();
   y = (y) => this.Element.y(y);
+  opacity = () => this.Element.opacity();
+  opacity = (opacity) => this.Element.opacity(opacity);
   plot = (x1, y1, x2, y2) => this.Element.plot(x1, y1, x2, y2);
   array = () => this.Element.array();
 
@@ -62,7 +64,10 @@ const Shape = class Shape {
 
       AppToolbox.tools['Select'].select(this);
 
+      listenForOpacityChange();
       listenForResizing();
+      // listenForResizing();
+      getElement("#opacity").value = this.opacity();
       getElement("#width").value = this.width();
       getElement("#height").value = this.height();
 
@@ -94,7 +99,7 @@ const Shape = class Shape {
     this.removeActiveBorder();
     AppShapes.selectedShapeID = this.ID;
     AppShapes.deselectShapeListItem(this.ID);
-    stopTrackingSizes();
+    removeParamEventListeners();
   }
 
   renameShape = (name) => {
