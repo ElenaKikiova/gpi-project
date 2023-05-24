@@ -29,11 +29,14 @@ const Shapes = class {
   }
 
   removeShape = (shape) => {
-    const index = this.all.indexOf(shape);
-    this.counter[shape.Type] = this.counter[shape.Type] - 1;
-    getElement('#shapes-list').removeChild(getElement(`#${shape.ID}`));
-    this.all.splice(index, 1);
-    this.selectedShapeID = null;
+    const shapeListItem = getElement(`#${shape.ID}`);
+    if(shapeListItem) { 
+      const index = this.all.indexOf(shape);
+      this.counter[shape.Type] = this.counter[shape.Type] - 1;
+      getElement('#shapes-list').removeChild(shapeListItem);
+      this.all.splice(index, 1);
+      this.selectedShapeID = null;
+    }
   }
 
   deselectAllShapes = () => {
@@ -43,11 +46,13 @@ const Shapes = class {
   }
 
   selectShapeListItem = (shapeId) => {
-    getElement(`.list-shape-item#${shapeId}`).classList.add('selected');
+    const element = getElement(`.list-shape-item#${shapeId}`);
+    if(element) element.classList.add('selected');
   }
 
   deselectShapeListItem = (shapeId) => {
-    getElement(`.list-shape-item#${shapeId}`).classList.remove('selected');
+    const element = getElement(`.list-shape-item#${shapeId}`);
+    if(element) element.classList.remove('selected');
   }
 
   generateShapeId = (shape) => {

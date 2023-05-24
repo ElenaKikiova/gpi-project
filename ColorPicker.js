@@ -1,3 +1,4 @@
+import { AppShapes } from "./Shapes/Shapes.js";
 import { getElement } from "./helpers.js";
 
 const ColorPicker = class {
@@ -15,6 +16,10 @@ const ColorPicker = class {
 
   changeColor = (event) => {
     this.Color = event.target.value;
+
+    if(AppShapes.getSelectedShape()){
+      AppShapes.getSelectedShape().color(this.Color);
+    }
   }
 
 }

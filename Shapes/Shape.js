@@ -27,12 +27,14 @@ const Shape = class Shape {
   width = (w) => this.Element.width(w);
   height = () => this.Element.height();
   height = (h) => this.Element.height(h);
+  opacity = () => this.Element.opacity();
+  opacity = (opacity) => this.Element.opacity(opacity);
+  color = () => this.Element.fill();
+  color = (color) => this.Element.fill(color);
   x = () => this.Element.x();
   x = (x) => this.Element.x(x);
   y = () => this.Element.y();
   y = (y) => this.Element.y(y);
-  opacity = () => this.Element.opacity();
-  opacity = (opacity) => this.Element.opacity(opacity);
   plot = (x1, y1, x2, y2) => this.Element.plot(x1, y1, x2, y2);
   array = () => this.Element.array();
 
@@ -66,7 +68,6 @@ const Shape = class Shape {
 
       listenForOpacityChange();
       listenForResizing();
-      // listenForResizing();
       getElement("#opacity").value = this.opacity();
       getElement("#width").value = this.width();
       getElement("#height").value = this.height();

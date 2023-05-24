@@ -19,8 +19,6 @@ const KeyPressHandle = class {
 
   selectToolKeyCombinations = () => {
 
-    console.log(existsFocusedInput());
-
     // hanlde delete shape
     if((this.history[0] === 'Backspace' || this.history[0] === 'Delete') && !existsFocusedInput()){
       if(AppShapes.getSelectedShape()) AppShapes.getSelectedShape().deleteShape();
