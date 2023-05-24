@@ -31,4 +31,9 @@ getElement("#downloadImage").addEventListener("click", () => {
   SVGArea.downloadImage();
 })
 
+
+getElement("#openedImageFile").addEventListener("change", (e) => {
+  SVGArea.openImage(e);
+})
+
 export { ColorPickerObject }

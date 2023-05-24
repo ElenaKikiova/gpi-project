@@ -1,3 +1,4 @@
+import { Shape } from "./Shapes/Shape.js";
 import { AppShapes } from "./Shapes/Shapes.js";
 import { getElement } from "./helpers.js";
 
@@ -68,6 +69,33 @@ const DrawingArea = class {
     document.body.removeChild(downloadLink);
   }
 
+  openImage = (e) => {
+    if(e.target.files[0]){
+      const file = e.target.files[0];
+      console.log(file);
+      var reader = new FileReader();
+      const that = this;
+      reader.onload = function(event){
+          var img = new Image();
+          img.src = event.target.result;
+
+          let [width, height] = [0, 0];
+          
+          const imageGroup = that.Image.group();
+          const image = imageGroup.image(img.src, (event) => {
+            width = event.target.naturalWidth;
+            height = event.target.naturalHeight;
+            
+            const imageRect = imageGroup.rect(width, height).attr('class', 'image-rect').fill('transparent');
+            const shapeElement = new Shape(imageGroup);
+            AppShapes.addShape(shapeElement);
+            console.log('added img')
+          });
+
+      }
+      reader.readAsDataURL(e.target.files[0]); 
+    }
+  };
 }
 
 export { DrawingArea }

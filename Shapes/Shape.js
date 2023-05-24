@@ -20,7 +20,7 @@ const Shape = class Shape {
     this.Element = SVGElement;
     this.Element.node.addEventListener("click", this.onSelected);
     this.Title = AppShapes.generateShapeName(SVGElement);
-    this.Type = this.Element.type;
+    this.Type = this.Element.type === 'G' ? 'imported image' : this.Element.type;
   }
 
   width = () => this.Element.width();
@@ -40,6 +40,7 @@ const Shape = class Shape {
 
   addActiveBorder = () => {
     if(this.Element.type != 'line'){
+      console.log('bor')
       this.Element.stroke({ color: '#666', width: 2, linecap: 'round', dasharray: '5, 5' });
     }
   }

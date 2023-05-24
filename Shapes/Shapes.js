@@ -9,7 +9,7 @@ const Shapes = class {
 
   constructor(){
     this.all = [];
-    this.counter = {'rect': 0, 'ellipse': 0, 'line': 0};
+    this.counter = {'rect': 0, 'ellipse': 0, 'line': 0, 'g': 0};
   }
 
   getShapeByID = (shapeId) => {
@@ -60,7 +60,8 @@ const Shapes = class {
   }
 
   generateShapeName = (shape) => {
-    return toSentenceCase(shape.type) + ' ' + Number(this.counter[shape.type] + 1);
+    console.log(shape)
+    return toSentenceCase(shape.type === 'G' ? shape.type : 'imported image') + ' ' + Number(this.counter[shape.type] + 1);
   }
   
   listItemSelected = (shape) => {
