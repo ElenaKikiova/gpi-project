@@ -102,4 +102,17 @@ const existsFocusedInput = () => {
 
 const toSentenceCase = (string) => string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 
-export { getElement, getClientCursorXY, getLineLength, toSentenceCase, getOpacity, getLineWidth, listenForResizing, removeParamEventListeners, existsFocusedInput, listenForOpacityChange, listenForRotation };
+
+export { 
+  getElement, 
+  getClientCursorXY, 
+  getLineLength, 
+  toSentenceCase, 
+  getOpacity, 
+  getLineWidth, 
+  listenForResizing, 
+  removeParamEventListeners, 
+  existsFocusedInput, 
+  listenForOpacityChange, 
+  listenForRotation
+};

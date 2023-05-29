@@ -84,7 +84,7 @@ const Shape = class Shape {
     document.addEventListener("mouseup", this.stopDragging)
     /* save dragging position - what position inside the shape does the user hold at (xy)? */
     let [dragX, dragY] = getClientCursorXY(event);
-    [this.dragHoldX, this.dragHoldY] = [dragX - this.Element.node.getBoundingClientRect().x + 60, dragY - this.Element.node.getBoundingClientRect().y + 60];
+    [this.dragHoldX, this.dragHoldY] = [dragX - this.x(), dragY - this.y()];
     document.addEventListener("mousemove", this.dragElement)
   }
 
