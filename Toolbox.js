@@ -13,7 +13,6 @@ const Toolbox = class {
     Select: new SelectTool(),
     Line: new LineTool(),
     Rectangle: new RectangleTool(),
-    New: new NewTool(),
     Ellipse: new EllipseTool()
   };
 
