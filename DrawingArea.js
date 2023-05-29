@@ -81,8 +81,6 @@ const DrawingArea = class {
           
           const imageGroup = that.Image.group();
           imageGroup.image(img.src, (event) => {
-            width = event.target.naturalWidth;
-            height = event.target.naturalHeight;
 
             console.log(event.target.naturalHeight, event.target.naturalWidth)
             

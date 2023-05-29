@@ -20,7 +20,7 @@ const Shape = class Shape {
     this.Element = SVGElement;
     this.Element.node.addEventListener("click", this.onSelected);
     this.Title = AppShapes.generateShapeName(SVGElement);
-    this.Type = this.Element.type === 'G' ? 'imported image' : this.Element.type;
+    this.Type = this.Element.type === 'G' ? 'Shape' : this.Element.type;
   }
 
   width = () => this.Element.width();
@@ -42,7 +42,6 @@ const Shape = class Shape {
 
   addActiveBorder = () => {
     if(this.Element.type != 'line'){
-      console.log('bor')
       this.Element.stroke({ color: '#666', width: 2, linecap: 'round', dasharray: '5, 5' });
     }
   }
@@ -86,18 +85,14 @@ const Shape = class Shape {
     /* save dragging position - what position inside the shape does the user hold at (xy)? */
     let [dragX, dragY] = getClientCursorXY(event);
     [this.dragHoldX, this.dragHoldY] = [dragX - this.Element.node.getBoundingClientRect().x + 60, dragY - this.Element.node.getBoundingClientRect().y + 60];
-    console.log('dragx', dragX, 'drag hold', dragX - this.Element.node.getBoundingClientRect().x + 60, 'elem x', this.Element.node.getBoundingClientRect().x - 60)
     document.addEventListener("mousemove", this.dragElement)
   }
 
   dragElement = (event) => {
     /* drag the shape, setting it's xy the client xy minus the position at which the user is holding the shape */
     const [x, y] = getClientCursorXY(event);
-    console.log(this.dragHoldX, this.Element.x(), this.Element.node.getBoundingClientRect().x - 60)
-    console.log('cursor x ', x, '- drag hodl x', this.dragHoldX, '= new elem x', x - this.dragHoldX)
     this.Element.x(x - this.dragHoldX);
     this.Element.y(y - this.dragHoldY);
-    // this.Element.move(x - this.dragHoldX, y - this.dragHoldY)
   }
 
   stopDragging = () => {
