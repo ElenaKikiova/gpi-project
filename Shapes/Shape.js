@@ -1,5 +1,5 @@
 import { getClientCursorXY, getElement, removeParamEventListeners, listenForResizing, listenForOpacityChange, listenForRotation } from "../helpers.js";
-import { AppToolbox } from "../Main.js";
+import { AppToolbox, SVGArea } from "../Main.js";
 import { AppShapes } from "./Shapes.js";
 
 const Shape = class Shape {
@@ -17,7 +17,9 @@ const Shape = class Shape {
 
   constructor(SVGElement){
     this.ID = AppShapes.generateShapeId(SVGElement);
+    this.Container = SVGArea.getImage().group().attr('data-container-for', this.ID);
     this.Element = SVGElement;
+    this.Container.add(this.Element);
     this.Element.node.addEventListener("click", this.onSelected);
     this.Title = AppShapes.generateShapeName(SVGElement);
     this.Type = this.Element.type === 'G' ? 'Shape' : this.Element.type;
@@ -54,6 +56,7 @@ const Shape = class Shape {
 
   deleteShape = () => {
     this.Element.remove();
+    this.Container.remove();
     this.onDeselected();
     AppShapes.removeShape(this);
   }
@@ -91,8 +94,8 @@ const Shape = class Shape {
   dragElement = (event) => {
     /* drag the shape, setting it's xy the client xy minus the position at which the user is holding the shape */
     const [x, y] = getClientCursorXY(event);
-    this.Element.x(x - this.dragHoldX);
-    this.Element.y(y - this.dragHoldY);
+    this.Container.x(x - this.dragHoldX);
+    this.Container.y(y - this.dragHoldY);
   }
 
   stopDragging = () => {

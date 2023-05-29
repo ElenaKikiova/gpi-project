@@ -56,7 +56,6 @@ const SelectTool = class SelectTool extends Tool {
         const cloneShape = new Shape(cloneSVG);
         AppShapes.addShape(cloneShape);
         cloneSVG.move(cloneSVG.x() + 20*this.pasteCount, cloneSVG.y() + 20 * this.pasteCount);
-        SVGArea.getImage().add(cloneSVG);
       })
     }
   }
