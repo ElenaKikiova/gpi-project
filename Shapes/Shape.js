@@ -1,4 +1,4 @@
-import { getClientCursorXY, getElement, removeParamEventListeners, listenForResizing, listenForOpacityChange } from "../helpers.js";
+import { getClientCursorXY, getElement, removeParamEventListeners, listenForResizing, listenForOpacityChange, listenForRotation } from "../helpers.js";
 import { AppToolbox } from "../Main.js";
 import { AppShapes } from "./Shapes.js";
 
@@ -35,6 +35,8 @@ const Shape = class Shape {
   x = (x) => this.Element.x(x);
   y = () => this.Element.y();
   y = (y) => this.Element.y(y);
+  getRotationAngle = () => Math.round(this.Element.transform().rotate);
+  rotationAngle = (angle) => this.Element.transform({ rotate: angle });
   plot = (x1, y1, x2, y2) => this.Element.plot(x1, y1, x2, y2);
   array = () => this.Element.array();
 
@@ -69,9 +71,11 @@ const Shape = class Shape {
 
       listenForOpacityChange();
       listenForResizing();
+      listenForRotation();
       getElement("#opacity").value = this.opacity();
       getElement("#width").value = this.width();
       getElement("#height").value = this.height();
+      getElement("#rotationAngle").value = this.getRotationAngle();
 
       this.Element.node.addEventListener("mousedown", this.beginDragging)
     }
@@ -81,14 +85,19 @@ const Shape = class Shape {
     document.addEventListener("mouseup", this.stopDragging)
     /* save dragging position - what position inside the shape does the user hold at (xy)? */
     let [dragX, dragY] = getClientCursorXY(event);
-    [this.dragHoldX, this.dragHoldY] = [dragX - this.Element.x(), dragY - this.Element.y()];
+    [this.dragHoldX, this.dragHoldY] = [dragX - this.Element.node.getBoundingClientRect().x + 60, dragY - this.Element.node.getBoundingClientRect().y + 60];
+    console.log('dragx', dragX, 'drag hold', dragX - this.Element.node.getBoundingClientRect().x + 60, 'elem x', this.Element.node.getBoundingClientRect().x - 60)
     document.addEventListener("mousemove", this.dragElement)
   }
 
   dragElement = (event) => {
     /* drag the shape, setting it's xy the client xy minus the position at which the user is holding the shape */
     const [x, y] = getClientCursorXY(event);
-    this.Element.move(x - this.dragHoldX, y - this.dragHoldY)
+    console.log(this.dragHoldX, this.Element.x(), this.Element.node.getBoundingClientRect().x - 60)
+    console.log('cursor x ', x, '- drag hodl x', this.dragHoldX, '= new elem x', x - this.dragHoldX)
+    this.Element.x(x - this.dragHoldX);
+    this.Element.y(y - this.dragHoldY);
+    // this.Element.move(x - this.dragHoldX, y - this.dragHoldY)
   }
 
   stopDragging = () => {

@@ -70,6 +70,20 @@ const resizeShape = (param) => {
   }
 }
 
+const listenForRotation = () => {
+  getElement("#rotationAngleInput").style.display = "flex";
+  getElement("#rotationAngle").addEventListener("input", rotate);
+}
+
+const rotate = () => {
+  
+  let value = validateNumberInput(getElement("#rotationAngle").value, -359, 359);
+
+  if(AppShapes.getSelectedShape()){
+    AppShapes.getSelectedShape().rotationAngle(value);
+  }
+}
+
 const removeParamEventListeners = () => {
   getElement("#widthInput").style.display = "none";
   getElement("#heightInput").style.display = "none";
@@ -78,6 +92,8 @@ const removeParamEventListeners = () => {
   getElement("#opacityInput").style.display = "none";
   getElement("#opacity").removeEventListener("input", changeOpacity);
   getElement("#opacity").value = 1;
+  getElement("#rotationAngleInput").style.display = "none";
+  getElement("#rotationAngle").removeEventListener("input", rotate);
 }
 
 const existsFocusedInput = () => {
@@ -86,4 +102,4 @@ const existsFocusedInput = () => {
 
 const toSentenceCase = (string) => string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 
-export { getElement, getClientCursorXY, getLineLength, toSentenceCase, getOpacity, getLineWidth, listenForResizing, removeParamEventListeners, existsFocusedInput, listenForOpacityChange };
+export { getElement, getClientCursorXY, getLineLength, toSentenceCase, getOpacity, getLineWidth, listenForResizing, removeParamEventListeners, existsFocusedInput, listenForOpacityChange, listenForRotation };

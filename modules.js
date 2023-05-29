@@ -10,6 +10,7 @@ getElement("#lineWidthInput").style.display = "none";
 getElement("#opacityInput").style.display = "none";
 getElement("#widthInput").style.display = "none";
 getElement("#heightInput").style.display = "none";
+getElement("#rotationAngleInput").style.display = "none";
 
 // add onclick listeners for all tools
 AppToolbox.toolNames.forEach((tool) => {
