@@ -31,8 +31,8 @@ const Shape = class Shape {
   height = (h) => this.Element.height(h);
   opacity = () => this.Element.opacity();
   opacity = (opacity) => this.Element.opacity(opacity);
-  color = () => this.Element.fill();
-  color = (color) => this.Element.fill(color);
+  color = () => this.Element.fill(); 
+  color = (color) => this.Element.type === 'line' ? this.Element.stroke({ color: color }) : this.Element.fill(color);
   x = () => this.Element.x();
   x = (x) => this.Element.x(x);
   y = () => this.Element.y();

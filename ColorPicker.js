@@ -16,9 +16,9 @@ const ColorPicker = class {
 
   changeColor = (event) => {
     this.Color = event.target.value;
-
-    if(AppShapes.getSelectedShape()){
-      AppShapes.getSelectedShape().color(this.Color);
+    const shape = AppShapes.getSelectedShape();
+    if(shape){
+      shape.color(this.Color);
     }
   }
 
