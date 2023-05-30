@@ -32,8 +32,8 @@ const NewTool = class NewTool extends Tool {
     elements[0].height(Math.abs(calculatedHeight));
 
     // elements[1].plot(elements[0].x(), elements[0].y(), elements[0].x() + calculatedWidth, elements[0].y() + calculatedHeight);
-    elements[1].plot(elements[0].x() + elements[0].width() / 4, elements[0].y() + elements[0].height() / 4, elements[0].x() + calculatedWidth, elements[0].y() + calculatedHeight).center(elements[0].x() + elements[0].width() / 2, elements[0].y() + elements[0].height() / 2);
-    elements[2].plot(elements[0].x() + calculatedWidth * 7 / 8, elements[0].y() + calculatedHeight / 8, elements[0].x() + calculatedWidth / 8, elements[0].y() + calculatedHeight * 7 / 8);
+    elements[1].plot(elements[0].x() + elements[0].width() / Math.PI, elements[0].y() + elements[0].height() / Math.PI, elements[0].x() + calculatedWidth, elements[0].y() + calculatedHeight).center(elements[0].x() + elements[0].width() / 2, elements[0].y() + elements[0].height() / 2);
+    elements[2].plot(elements[0].x() + calculatedWidth * Math.PI / 4, elements[0].y() + calculatedHeight / Math.PI / 4, elements[0].x() + calculatedWidth / Math.PI / 4, elements[0].y() + calculatedHeight * Math.PI / 4).center(elements[0].x() + elements[0].width() / 2, elements[0].y() + elements[0].height() / 2);
 
     if(calculatedWidth < 0){
       elements[0].x(this.startX - elements[0].width());
