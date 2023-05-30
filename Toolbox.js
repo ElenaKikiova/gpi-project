@@ -3,6 +3,7 @@ import { EllipseTool } from "./Tools/EllipseTool.js";
 import { LineTool } from "./Tools/LineTool.js";
 import { SelectTool } from "./Tools/SelectTool.js";
 import { RectangleTool } from "./Tools/RectangleTool.js";
+import { NewTool } from "./Tools/NewTool.js";
 
 const Toolbox = class {
 
@@ -12,7 +13,8 @@ const Toolbox = class {
     Select: new SelectTool(),
     Line: new LineTool(),
     Rectangle: new RectangleTool(),
-    Ellipse: new EllipseTool()
+    Ellipse: new EllipseTool(),
+    New: new NewTool()
   };
 
   toolNames = Object.keys(this.tools);

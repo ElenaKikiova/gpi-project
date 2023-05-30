@@ -53,6 +53,7 @@ const EllipseTool = class EllipseTool extends Tool {
     }
 
     if(this.shiftHold){
+      console.log('shift')
       this.ShapeElement.height(this.ShapeElement.width());
       widthLabel = {x: this.startX + this.ShapeElement.width() - this.SizeLabelWidth.width(), y: this.startY + this.ShapeElement.height()};
       heightLabel = {x: this.startX + this.ShapeElement.width(), y: this.startY + this.ShapeElement.height() - this.SizeLabelHeight.height()};
